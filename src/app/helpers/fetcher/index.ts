@@ -4,7 +4,7 @@ import { ZodError } from 'zod';
 // https://github.com/colinhacks/zod#writing-generic-functions
 export default async function fetcher<T extends z.ZodTypeAny>(url: string, schema?: T) {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, { cache: 'force-cache' });
 
     if (!response.ok) {
       throw new Error('Error fetching data');
