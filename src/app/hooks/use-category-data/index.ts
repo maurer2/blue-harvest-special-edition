@@ -29,8 +29,6 @@ export default async function useCategoryData({ category, page, schema }: UseCat
 
   return [
     response as z.infer<typeof schema>,
-    nextPage,
-    previousPage,
     currentPageAsNumber,
     hasNextPage,
     hasPrevPage,

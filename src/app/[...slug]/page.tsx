@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { lazy } from 'react';
 import Link from 'next/link';
 
 import Navigation from '../components/Navigation';
@@ -16,6 +16,7 @@ type CategoryProps = {
 const categoriesMap = {
   people: lazy(() => import('../components/PeopleDetails')),
   planets: lazy(() => import('../components/PlanetDetails')),
+  films: lazy(() => import('../components/Films')),
 };
 
 export default async function Category({ params }: CategoryProps) {
@@ -30,18 +31,17 @@ export default async function Category({ params }: CategoryProps) {
   const ComponentForCategory =
     category in categoriesMap ? categoriesMap[category as keyof typeof categoriesMap] : null;
 
-  const [response, nextPage, previousPage, currentPageAsNumber, hasNextPage, hasPrevPage] =
-    await useCategoryData({
-      category,
-      page,
-      schema: pageSchema,
-    });
+  const [response, currentPageAsNumber, hasNextPage, hasPrevPage] = await useCategoryData({
+    category,
+    page,
+    schema: pageSchema,
+  });
 
   if (response === null || ComponentForCategory === null) {
     return notFound();
   }
 
-  const entries = response?.results ?? [];
+  const entries: Page['results'] = response?.results ?? [];
 
   return (
     <div>
@@ -61,15 +61,15 @@ export default async function Category({ params }: CategoryProps) {
         </div>
 
         {entries.length ? (
-          <ul className="grid grid-cols-4 gap-4">
-            {entries.map((entry: Page['results'][number], index: number) => (
-              <li className="overflow-hidden border p-4" key={entry.name}>
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            {entries.map((entry, index) => (
+              <li className="overflow-hidden border p-4" key={entry.name || entry.title}>
                 <ComponentForCategory details={entry} index={index} />
               </li>
             ))}
           </ul>
         ) : (
-          <p>No entries found</p>
+          <p>No entries found for this category.</p>
         )}
       </article>
     </div>
