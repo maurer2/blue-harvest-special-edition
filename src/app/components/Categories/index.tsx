@@ -5,20 +5,6 @@ type CategoriesProps = {
   categories: Record<string, string> | null;
 };
 
-function CategoriesLoading() {
-  const entries = Array.from({ length: 3 }, (_, index) => index);
-
-  return (
-    <ul className="animate-pulse" aria-hidden>
-      {entries.map((name) => (
-        <li key={name}>
-          <span>Entry</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 async function Categories({ categories }: CategoriesProps): Promise<ReactElement> {
   const entries = categories !== null ? Object.entries(categories) : [];
 
@@ -43,4 +29,3 @@ async function Categories({ categories }: CategoriesProps): Promise<ReactElement
 }
 
 export default Categories;
-export { CategoriesLoading };

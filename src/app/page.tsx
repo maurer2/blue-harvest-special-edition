@@ -1,8 +1,7 @@
-import { Suspense } from 'react';
 import fetcher from './helpers/fetcher';
 import type { RootCategories } from './schemas/root-categories';
 import rootCategoriesSchema from './schemas/root-categories';
-import Categories, { CategoriesLoading } from './components/Categories';
+import Categories from './components/Categories';
 import Navigation from './components/Navigation';
 
 export default async function Home() {
@@ -17,9 +16,7 @@ export default async function Home() {
         <Navigation categories={null} />
       </nav>
       <main className="m-6">
-        <Suspense fallback={<CategoriesLoading />}>
-          <Categories categories={categories} />
-        </Suspense>
+        <Categories categories={categories} />
       </main>
     </div>
   );
