@@ -30,13 +30,7 @@ async function Categories({ categories }: CategoriesProps): Promise<ReactElement
     <ul className="list-disc">
       {entries.map(([name]) => (
         <li key={name}>
-          <Link
-            href={{
-              pathname: `/${name}/1`,
-            }}
-          >
-            {name}
-          </Link>
+          <Link href={`/${name}/1`}>{name}</Link>
         </li>
       ))}
     </ul>

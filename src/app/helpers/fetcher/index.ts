@@ -20,10 +20,8 @@ export default async function fetcher<T extends z.ZodTypeAny>(url: string, schem
   } catch (error) {
     if (error instanceof Error || error instanceof ZodError) {
       console.warn(error.message);
-      throw new Error(error.message, { cause: error });
     }
 
     console.warn('Unknown error');
-    throw new Error('Unknown error');
   }
 }
