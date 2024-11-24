@@ -32,8 +32,7 @@ async function Categories({ categories }: CategoriesProps): Promise<ReactElement
         <li key={name}>
           <Link
             href={{
-              pathname: `/${name}`,
-              query: { p: '1' },
+              pathname: `/${name}/1`,
             }}
           >
             {name}

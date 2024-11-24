@@ -38,8 +38,7 @@ async function Navigation({ categories }: NavigationProps): Promise<ReactElement
             <li key={name}>
               <Link
                 href={{
-                  pathname: `/${name}`,
-                  query: { p: '1' },
+                  pathname: `/${name}/1`,
                 }}
                 className="capitalize"
               >
