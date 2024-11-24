@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import Link from 'next/link';
+import { clsx } from 'clsx';
 
 import Navigation from '../components/Navigation';
 import fetcher from '../helpers/fetcher';
@@ -45,33 +46,49 @@ export default async function Category({ params }: CategoryProps) {
 
   return (
     <div>
-      <Navigation categories={categories} />
+      <nav className="mb-4 bg-teal-300 p-6">
+        <Navigation categories={categories} />
+      </nav>
 
-      <article>
-        <div className="grid grid-cols-2">
-          <h2 className="col-span-full">
-            Category: <span className="capitalize">{category}</span> (page {page})
-          </h2>
-          <Link href={`/${category}/${currentPageAsNumber - 1}`} inert={!hasPrevPage}>
-            Previous page
-          </Link>
-          <Link href={`/${category}/${currentPageAsNumber + 1}`} inert={!hasNextPage}>
-            Next page
-          </Link>
-        </div>
+      <main className="m-6">
+        <article>
+          <div className="mb-6 grid grid-cols-2">
+            <h2 className="col-span-full mb-6">
+              <span className="text-xl capitalize">{category}</span> (page {page})
+            </h2>
+            <Link
+              href={`/${category}/${currentPageAsNumber - 1}`}
+              className={clsx('item-center mr-auto items-center border bg-teal-300 px-4 py-2', {
+                'line-through opacity-50': !hasPrevPage,
+              })}
+              inert={!hasPrevPage}
+            >
+              Previous page
+            </Link>
+            <Link
+              href={`/${category}/${currentPageAsNumber + 1}`}
+              className={clsx('ml-auto items-center border bg-teal-300 px-4 py-2', {
+                'line-through opacity-50': !hasNextPage,
+              })}
+              inert={!hasNextPage}
+            >
+              Next page
+            </Link>
+          </div>
 
-        {entries.length ? (
-          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {entries.map((entry, index) => (
-              <li className="overflow-hidden border p-4" key={entry.name || entry.title}>
-                <ComponentForCategory details={entry} index={index} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No entries found for this category.</p>
-        )}
-      </article>
+          {entries.length ? (
+            <ul className="mb-6 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+              {entries.map((entry, index) => (
+                <li className="overflow-hidden border p-4" key={entry.name || entry.title}>
+                  <ComponentForCategory details={entry} index={index} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No entries found for this category.</p>
+          )}
+        </article>
+      </main>
     </div>
   );
 }

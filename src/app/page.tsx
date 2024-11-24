@@ -12,10 +12,11 @@ export default async function Home() {
   );
 
   return (
-    <div className="grid min-h-screen items-start p-8 pb-20">
-      <Navigation categories={null} />
-      <main className="row-start-2 flex flex-col items-center gap-8">
-        <h2>Categories</h2>
+    <div className="min-h-screen bg-teal-50 pb-32">
+      <nav className="mb-4 bg-teal-300 p-6">
+        <Navigation categories={null} />
+      </nav>
+      <main className="m-6">
         <Suspense fallback={<CategoriesLoading />}>
           <Categories categories={categories} />
         </Suspense>

@@ -27,10 +27,15 @@ async function Categories({ categories }: CategoriesProps): Promise<ReactElement
   }
 
   return (
-    <ul className="list-disc">
+    <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
       {entries.map(([name]) => (
-        <li key={name}>
-          <Link href={`/${name}/1`}>{name}</Link>
+        <li className="contents" key={name}>
+          <Link
+            href={`/${name}/1`}
+            className="flex aspect-square items-center justify-center border p-4 text-center capitalize"
+          >
+            {name}
+          </Link>
         </li>
       ))}
     </ul>

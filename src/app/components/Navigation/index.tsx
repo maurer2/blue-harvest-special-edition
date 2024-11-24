@@ -9,28 +9,23 @@ async function Navigation({ categories }: NavigationProps): Promise<ReactElement
   const entries = categories !== null ? Object.entries(categories) : [];
 
   return (
-    <nav className="grid grid-cols-[auto_auto_1fr] gap-4">
-      <h1>Blue Harvest</h1>
-
-      <Link href="/">Home</Link>
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-[max-content_1fr]">
+      <Link href="/">
+        <h1>Blue Harvest (SE)</h1>
+      </Link>
 
       {entries.length ? (
-        <ul className="flex gap-4">
+        <ul className="flex flex-wrap gap-4 sm:flex-nowrap">
           {entries.map(([name]) => (
             <li key={name}>
-              <Link
-                href={{
-                  pathname: `/${name}/1`,
-                }}
-                className="capitalize"
-              >
+              <Link href={`/${name}/1`} className="capitalize">
                 {name}
               </Link>
             </li>
           ))}
         </ul>
       ) : null}
-    </nav>
+    </div>
   );
 }
 
