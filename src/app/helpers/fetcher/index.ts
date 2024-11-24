@@ -1,4 +1,5 @@
-import z, { ZodError } from 'zod';
+import type z from 'zod';
+import { ZodError } from 'zod';
 
 // https://github.com/colinhacks/zod#writing-generic-functions
 export default async function fetcher<T extends z.ZodTypeAny>(url: string, schema?: T) {
