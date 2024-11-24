@@ -23,9 +23,16 @@ export default async function useCategoryData({ category, page, schema }: UseCat
     console.warn(`Couldn't load page ${page} for ${category}`);
   }
 
+  const currentPageAsNumber = parseInt(page, 10);
   const hasNextPage = nextPage !== null;
   const hasPrevPage = previousPage !== null;
-  const currentPageAsNumber = parseInt(page, 10);
 
-  return [response as z.infer<typeof schema>, nextPage, previousPage, currentPageAsNumber] as const;
+  return [
+    response as z.infer<typeof schema>,
+    nextPage,
+    previousPage,
+    currentPageAsNumber,
+    hasNextPage,
+    hasPrevPage,
+  ] as const;
 }
