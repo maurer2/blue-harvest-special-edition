@@ -1,5 +1,4 @@
-import type z from 'zod';
-import { ZodError } from 'zod';
+import { ZodError, type z } from 'zod';
 
 // https://github.com/colinhacks/zod#writing-generic-functions
 export default async function fetcher<T extends z.ZodTypeAny>(url: string, schema?: T) {
@@ -16,7 +15,7 @@ export default async function fetcher<T extends z.ZodTypeAny>(url: string, schem
       return data;
     }
 
-    const parsedData = schema.parse(data);
+    const parsedData = schema.parse(data) as z.infer<T>;
     return parsedData;
   } catch (error) {
     if (error instanceof Error || error instanceof ZodError) {

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import fetcher from '../../../helpers/fetcher';
 import peopleSchema, { type People } from '../../../schemas/people';
+import useCategoryData from '../../../hooks/use-category-data';
 
 type PeopleProps = {
   category: string;
@@ -9,19 +9,11 @@ type PeopleProps = {
 };
 
 export default async function People({ category, page }: PeopleProps) {
-  let response: People | null = null;
-  let nextPage: string | null = null;
-  let previousPage: string | null = null;
-
-  try {
-    response = await fetcher(`https://swapi.dev/api/${category}?page=${page}`, peopleSchema);
-
-    nextPage = response?.next ?? null;
-    previousPage = response?.previous ?? null;
-  } catch {
-    response = null;
-    console.warn("Couldn't load page");
-  }
+  const [response, nextPage, previousPage] = await useCategoryData({
+    category,
+    page,
+    schema: peopleSchema,
+  });
 
   const hasNextPage = nextPage !== null;
   const hasPrevPage = previousPage !== null;

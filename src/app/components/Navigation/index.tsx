@@ -11,6 +11,7 @@ function NavigationLoading() {
   return (
     <nav className="grid grid-cols-[auto_auto_1fr] gap-4">
       <h1>Blue Harvest</h1>
+
       <Link href="/">Home</Link>
 
       <ul className="animate-pulse" aria-hidden>
@@ -30,6 +31,7 @@ async function Navigation({ categories }: NavigationProps): Promise<ReactElement
   return (
     <nav className="grid grid-cols-[auto_auto_1fr] gap-4">
       <h1>Blue Harvest</h1>
+
       <Link href="/">Home</Link>
 
       {entries.length ? (
