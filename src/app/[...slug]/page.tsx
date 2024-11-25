@@ -1,9 +1,8 @@
 import { lazy } from 'react';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { clsx } from 'clsx';
 
 import Navigation from '../components/Navigation';
+import CategoryDetailsHeader from '../components/CategoryDetailsHeader';
 import fetcher from '../helpers/fetcher';
 import type { RootCategories } from '../schemas/root-categories';
 import rootCategoriesSchema from '../schemas/root-categories';
@@ -21,18 +20,17 @@ const categoriesMap = {
 
 export default async function Category({ params }: CategoryProps) {
   const category = (await params).slug[0];
-  const page = (await params).slug[1];
+  const pageNumber = (await params).slug[1];
+
+  const ComponentForCategory =
+    category in categoriesMap ? categoriesMap[category as keyof typeof categoriesMap] : null;
 
   const categories: RootCategories | null = await fetcher(
     'https://swapi.dev/api',
     rootCategoriesSchema,
   );
-
-  const ComponentForCategory =
-    category in categoriesMap ? categoriesMap[category as keyof typeof categoriesMap] : null;
-
   const response: Page | null = await fetcher(
-    `https://swapi.dev/api/${category}?page=${page}`,
+    `https://swapi.dev/api/${category}?page=${pageNumber}`,
     pageSchema,
   );
   const nextPage = response?.next ?? null;
@@ -41,10 +39,6 @@ export default async function Category({ params }: CategoryProps) {
   if (!ComponentForCategory || response === null) {
     return notFound();
   }
-
-  const currentPageAsNumber = parseInt(page, 10);
-  const hasNextPage = nextPage !== null;
-  const hasPrevPage = previousPage !== null;
 
   const entries: Page['results'] = response?.results ?? [];
 
@@ -56,34 +50,13 @@ export default async function Category({ params }: CategoryProps) {
 
       <main className="m-6">
         <article>
-          <div className="mb-6 grid grid-cols-2">
-            <h2 className="col-span-full mb-6">
-              <span className="text-xl capitalize">{category}</span> (page {page})
-            </h2>
-            <Link
-              href={`/${category}/${currentPageAsNumber - 1}`}
-              className={clsx(
-                'item-center hover:border-gray mr-auto items-center border bg-teal-300 px-4 py-2 hover:bg-transparent',
-                {
-                  'line-through opacity-50': !hasPrevPage,
-                },
-              )}
-              inert={!hasPrevPage}
-            >
-              Previous page
-            </Link>
-            <Link
-              href={`/${category}/${currentPageAsNumber + 1}`}
-              className={clsx(
-                'item-center hover:border-gray ml-auto items-center border bg-teal-300 px-4 py-2 hover:bg-transparent',
-                {
-                  'line-through opacity-50': !hasNextPage,
-                },
-              )}
-              inert={!hasNextPage}
-            >
-              Next page
-            </Link>
+          <div className="mb-6">
+            <CategoryDetailsHeader
+              category={category}
+              pageNumber={pageNumber}
+              nextPage={nextPage}
+              previousPage={previousPage}
+            />
           </div>
 
           {entries.length ? (
