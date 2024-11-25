@@ -22,7 +22,6 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   if (process.env.NODE_ENV === 'development') {
-    console.log('MSW started');
     server.listen();
   }
 

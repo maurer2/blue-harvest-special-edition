@@ -11,20 +11,22 @@ async function PeopleDetails({ details, index }: PlanetDetailsProps): Promise<Re
   const prefix = `planet-details-${index}`;
 
   if (!planetDetails.success) {
-    console.log(planetDetails.error);
-
-    return <p>Details couldn't be loaded</p>;
+    return <p>Details couldn't be loaded.</p>;
   }
 
   const { name, diameter, climate, terrain, population } = planetDetails.data;
 
   return (
-    <dl role="list" className="grid grid-cols-[max-content_1fr] gap-x-2 gap-y-1">
+    <dl
+      role="list"
+      className="grid grid-cols-[max-content_1fr] gap-x-2 gap-y-1"
+      aria-label="Planet details"
+    >
       <dt id={`${prefix}-name`}>Name:</dt>
       <dd aria-labelledby={`${prefix}-name`}>{name}</dd>
 
       <dt id={`${prefix}-diameter`}>Diameter:</dt>
-      <dd aria-labelledby={`${prefix}-diameter`}>{diameter} km</dd>
+      <dd aria-labelledby={`${prefix}-diameter`}>{diameter} KM</dd>
 
       <dt id={`${prefix}-climate`}>Mass:</dt>
       <dd aria-labelledby={`${prefix}-climate`}>{climate}</dd>
