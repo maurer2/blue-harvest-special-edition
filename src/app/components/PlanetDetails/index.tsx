@@ -28,7 +28,7 @@ async function PeopleDetails({ details, index }: PlanetDetailsProps): Promise<Re
       <dt id={`${prefix}-diameter`}>Diameter:</dt>
       <dd aria-labelledby={`${prefix}-diameter`}>{diameter} KM</dd>
 
-      <dt id={`${prefix}-climate`}>Mass:</dt>
+      <dt id={`${prefix}-climate`}>Climate:</dt>
       <dd aria-labelledby={`${prefix}-climate`}>{climate}</dd>
 
       <dt id={`${prefix}-terrain`}>Terrain:</dt>

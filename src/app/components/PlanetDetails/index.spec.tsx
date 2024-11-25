@@ -53,8 +53,7 @@ describe('PlanetDetails', () => {
   it('should render', async () => {
     await renderSeverComponent();
 
-    expect(screen.getByLabelText('Planet details')).toBeInTheDocument();
-    expect(screen.getByRole('list')).toBeInTheDocument();
+    expect(screen.getByRole('list', { name: 'Planet details' })).toBeInTheDocument();
   });
 
   it('should render correct values', async () => {
@@ -66,8 +65,8 @@ describe('PlanetDetails', () => {
     expect(screen.getByText('Diameter:')).toBeInTheDocument();
     expect(screen.getByRole('definition', { name: 'Diameter:' })).toHaveTextContent('10465 KM');
 
-    expect(screen.getByText('Mass:')).toBeInTheDocument();
-    expect(screen.getByRole('definition', { name: 'Mass:' })).toHaveTextContent('arid');
+    expect(screen.getByText('Climate:')).toBeInTheDocument();
+    expect(screen.getByRole('definition', { name: 'Climate:' })).toHaveTextContent('arid');
 
     expect(screen.getByText('Terrain:')).toBeInTheDocument();
     expect(screen.getByRole('definition', { name: 'Terrain:' })).toHaveTextContent('desert');

@@ -11,22 +11,24 @@ async function PeopleDetails({ details, index }: PeopleDetailsProps): Promise<Re
   const prefix = `people-details-${index}`;
 
   if (!peopleDetails.success) {
-    console.warn(peopleDetails.error);
-
-    return <p>Details couldn't be loaded</p>;
+    return <p>Details couldn't be loaded.</p>;
   }
 
   const { name, height, gender, mass, skin_color, hair_color } = peopleDetails.data;
 
   return (
-    <dl role="list" className="grid grid-cols-[max-content_1fr] gap-x-2 gap-y-1">
+    <dl
+      role="list"
+      className="grid grid-cols-[max-content_1fr] gap-x-2 gap-y-1"
+      aria-label="People details"
+    >
       <dt id={`${prefix}-name`}>Name:</dt>
       <dd aria-labelledby={`${prefix}-name`}>{name}</dd>
 
       <dt id={`${prefix}-height`}>Height:</dt>
       <dd aria-labelledby={`${prefix}-height`}>{height} cm</dd>
 
-      <dt id={`${prefix}-height`}>Mass:</dt>
+      <dt id={`${prefix}-mass`}>Mass:</dt>
       <dd aria-labelledby={`${prefix}-mass`}>{mass} kg</dd>
 
       <dt id={`${prefix}-gender`}>Gender:</dt>
