@@ -2,12 +2,12 @@ import { expect, describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import type { ComponentPropsWithoutRef } from 'react';
 
-import FilmsDetails from '.';
+import FilmDetails from '.';
 
-type FilmsDetailsProps = ComponentPropsWithoutRef<typeof FilmsDetails>;
+type FilmDetailsProps = ComponentPropsWithoutRef<typeof FilmDetails>;
 
-describe('FilmsDetails', () => {
-  const props: FilmsDetailsProps = {
+describe('FilmDetails', () => {
+  const props: FilmDetailsProps = {
     details: {
       title: 'A New Hope',
       episode_id: 4,
@@ -71,8 +71,8 @@ describe('FilmsDetails', () => {
     index: 0,
   };
 
-  async function renderSeverComponent(currentProps: FilmsDetailsProps = props) {
-    const component = await FilmsDetails({ ...currentProps });
+  async function renderSeverComponent(currentProps: FilmDetailsProps = props) {
+    const component = await FilmDetails({ ...currentProps });
 
     return render(component);
   }

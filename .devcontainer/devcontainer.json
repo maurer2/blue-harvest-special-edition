@@ -49,7 +49,7 @@
       "extensions": [
         "aaron-bond.better-comments",
         "ban.spellright",
-        // "bradlc.vscode-tailwindcss",
+        "bradlc.vscode-tailwindcss",
         "christian-kohler.path-intellisense",
         "clinyong.vscode-css-modules",
         "DavidAnson.vscode-markdownlint",
@@ -88,20 +88,12 @@
         "wix.vscode-import-cost",
         "wmaurer.change-case",
         "yatki.vscode-surround",
-        // "Orta.vscode-jest", // jest
-        "vitest.explorer", // vitest
+        "vitest.explorer",
         "yoavbls.pretty-ts-errors",
         "mikestead.dotenv",
         "vunguyentuan/vscode-css-variables",
         "qcz/vscode-restart-ts-server-button",
-        // "microsoft/vscode-pull-request-github",
-        // "github.copilot",
         "vincaslt.highlight-matching-tag"
-        // "oven.bun-vscode",
-        // "tamasfe.even-better-toml"
-        // "biomejs.biome"
-        // "astro-build.astro-vscode",
-        // "chakra-ui.panda-css-vscode"
       ]
     }
   }

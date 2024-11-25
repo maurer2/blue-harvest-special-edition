@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const planetSchema = z.object({
+const planetsSchema = z.object({
   name: z.string(),
   rotation_period: z.string(),
   orbital_period: z.string(),
@@ -17,5 +17,5 @@ const planetSchema = z.object({
   url: z.string(),
 });
 
-export default planetSchema;
-export type Planet = z.infer<typeof planetSchema>;
+export default planetsSchema;
+export type Planet = z.infer<typeof planetsSchema>;

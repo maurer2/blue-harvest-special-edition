@@ -12,7 +12,7 @@ async function Navigation({ categories }: NavigationProps): Promise<ReactElement
 
   return (
     <div
-      className="grid grid-cols-1 gap-4 sm:grid-cols-[max-content_1fr]"
+      className="grid grid-cols-1 gap-6 sm:grid-cols-[max-content_1fr]"
       aria-label="Main navigation with Home button"
     >
       <h1>

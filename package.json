@@ -1,6 +1,6 @@
 {
   "name": "blue-harvest-special-edition",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "next build",
@@ -8,8 +8,7 @@
     "format": "prettier --write './**/*.{js,jsx,mjs,cjs,ts,tsx,json}' ",
     "lint": "next lint",
     "start": "next start",
-    "test": "vitest",
-    "test:watch": "vitest -w"
+    "test": "vitest"
   },
   "dependencies": {
     "clsx": "^2.1.1",

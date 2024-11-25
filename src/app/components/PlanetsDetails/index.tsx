@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import planetSchema from '../../schemas/planets';
+import planetsSchema from '../../schemas/planets';
 
 type PlanetDetailsProps = {
   details: unknown;
@@ -7,7 +7,7 @@ type PlanetDetailsProps = {
 };
 
 async function PlanetsDetails({ details, index }: PlanetDetailsProps): Promise<ReactElement> {
-  const planetDetails = planetSchema.safeParse(details);
+  const planetDetails = planetsSchema.safeParse(details);
   const prefix = `planet-details-${index}`;
 
   if (!planetDetails.success) {

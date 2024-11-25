@@ -6,7 +6,7 @@ import CategoryDetailsHeader from '.';
 
 type CategoryDetailsHeaderProps = ComponentPropsWithoutRef<typeof CategoryDetailsHeader>;
 
-describe('Categories', () => {
+describe('CategoryDetailsHeader', () => {
   const props: CategoryDetailsHeaderProps = {
     category: 'category',
     pageNumber: '1',

@@ -11,11 +11,4 @@ export const handlers = [
       starships: 'https://swapi.dev/api/starships',
     });
   }),
-
-  // http.get('https://swapi.dev/api', () => {
-  //   return new HttpResponse(null, {
-  //     status: 404,
-  //     statusText: 'Error',
-  //   });
-  // }),
 ];

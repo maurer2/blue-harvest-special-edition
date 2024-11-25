@@ -2,7 +2,7 @@ import type { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
-import { server } from './mocks/server';
+// import { server } from './mocks/server';
 import './globals.css';
 
 const geistSans = localFont({
@@ -22,9 +22,9 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
-  if (process.env.NODE_ENV === 'development') {
-    server.listen();
-  }
+  // if (process.env.NODE_ENV === 'development') {
+  //   server.listen();
+  // }
 
   return (
     <html lang="en">
