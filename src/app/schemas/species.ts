@@ -19,4 +19,4 @@ const speciesSchema = z.object({
 });
 
 export default speciesSchema;
-export type SpeciesSchema = z.infer<typeof speciesSchema>;
+export type Species = z.infer<typeof speciesSchema>;
