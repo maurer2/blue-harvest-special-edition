@@ -24,7 +24,7 @@ async function CategoryDetailsHeader({
       <h2 className="col-span-full mb-6 text-xl capitalize">{category}</h2>
       <div className="flex gap-6">
         <Link
-          href={`/${category}/${currentPageAsNumber - 1}`}
+          href={`/categories/${category}/${currentPageAsNumber - 1}`}
           className={clsx(
             'item-hover:border-gray flex grow-0 items-center border bg-teal-300 px-4 py-2 hover:bg-transparent',
             {
@@ -39,7 +39,7 @@ async function CategoryDetailsHeader({
           <span className="grow">{pageNumber}</span>
         </p>
         <Link
-          href={`/${category}/${currentPageAsNumber + 1}`}
+          href={`/categories/${category}/${currentPageAsNumber + 1}`}
           className={clsx(
             'hover:border-gray flex grow-0 items-center border bg-teal-300 px-4 py-2 hover:bg-transparent',
             {

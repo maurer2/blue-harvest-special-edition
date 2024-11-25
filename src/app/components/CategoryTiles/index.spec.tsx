@@ -37,7 +37,5 @@ describe('Categories', () => {
 
     expect(screen.getByRole('list')).toBeInTheDocument();
     expect(screen.getAllByRole('listitem')).toHaveLength(2);
-
-    screen.debug();
   });
 });

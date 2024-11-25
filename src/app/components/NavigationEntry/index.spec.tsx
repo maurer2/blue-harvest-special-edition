@@ -8,7 +8,7 @@ type NavigationEntryProps = ComponentPropsWithoutRef<typeof NavigationEntry>;
 
 vi.mock('next/navigation', () => ({
   usePathname() {
-    return '/current-page/1';
+    return '/categories/current-page/1';
   },
 }));
 

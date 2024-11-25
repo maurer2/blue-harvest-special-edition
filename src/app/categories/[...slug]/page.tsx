@@ -1,24 +1,24 @@
 import { lazy } from 'react';
 import { notFound } from 'next/navigation';
 
-import Navigation from '../components/Navigation';
-import CategoryDetailsHeader from '../components/CategoryDetailsHeader';
-import fetcher from '../helpers/fetcher';
-import type { RootCategories } from '../schemas/root-categories';
-import rootCategoriesSchema from '../schemas/root-categories';
-import pageSchema, { type Page } from '../schemas/page';
+import Navigation from '../../components/Navigation';
+import CategoryDetailsHeader from '../../components/CategoryDetailsHeader';
+import fetcher from '../../helpers/fetcher';
+import type { RootCategories } from '../../schemas/root-categories';
+import rootCategoriesSchema from '../../schemas/root-categories';
+import pageSchema, { type Page } from '../../schemas/page';
 
 type CategoryProps = {
   params: Promise<{ slug: string }>;
 };
 
 const categoriesMap = {
-  people: lazy(() => import('../components/PeopleDetails')),
-  planets: lazy(() => import('../components/PlanetsDetails')),
-  films: lazy(() => import('../components/FilmsDetails')),
-  species: lazy(() => import('../components/SpeciesDetails')),
-  vehicles: lazy(() => import('../components/VehiclesDetails')),
-  starships: lazy(() => import('../components/StarshipsDetails')),
+  people: lazy(() => import('../../components/PeopleDetails')),
+  planets: lazy(() => import('../../components/PlanetsDetails')),
+  films: lazy(() => import('../../components/FilmsDetails')),
+  species: lazy(() => import('../../components/SpeciesDetails')),
+  vehicles: lazy(() => import('../../components/VehiclesDetails')),
+  starships: lazy(() => import('../../components/StarshipsDetails')),
 };
 
 export default async function Category({ params }: CategoryProps) {

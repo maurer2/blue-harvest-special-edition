@@ -11,13 +11,13 @@ type NavigationEntryProps = {
 
 function NavigationEntry({ name }: NavigationEntryProps): ReactElement {
   const pathname = usePathname();
-  const isActive = pathname.startsWith(`/${name}`);
+  const isActive = pathname.startsWith(`/categories/${name}`);
 
   return (
     <Link
-      href={`/${name}/1`}
-      className={clsx('capitalize', {
-        'underline underline-offset-4': isActive,
+      href={`/categories/${name}/1`}
+      className={clsx('capitalize underline-offset-4 hover:underline', {
+        underline: isActive,
       })}
       aria-current={isActive ? 'page' : undefined}
     >
