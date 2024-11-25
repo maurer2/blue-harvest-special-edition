@@ -1,4 +1,5 @@
 import type { ReactElement } from 'react';
+
 import filmsSchema from '../../schemas/films';
 
 type FilmsDetailsProps = {

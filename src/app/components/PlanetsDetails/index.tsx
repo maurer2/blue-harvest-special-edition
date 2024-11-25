@@ -6,7 +6,7 @@ type PlanetDetailsProps = {
   index: number;
 };
 
-async function PeopleDetails({ details, index }: PlanetDetailsProps): Promise<ReactElement> {
+async function PlanetsDetails({ details, index }: PlanetDetailsProps): Promise<ReactElement> {
   const planetDetails = planetSchema.safeParse(details);
   const prefix = `planet-details-${index}`;
 
@@ -40,4 +40,4 @@ async function PeopleDetails({ details, index }: PlanetDetailsProps): Promise<Re
   );
 }
 
-export default PeopleDetails;
+export default PlanetsDetails;
