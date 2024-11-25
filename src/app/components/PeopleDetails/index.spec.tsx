@@ -43,8 +43,6 @@ describe('PlanetDetails', () => {
   it('should render', async () => {
     await renderSeverComponent();
 
-    screen.debug();
-
     expect(screen.getByRole('list', { name: 'People details' })).toBeInTheDocument();
   });
 

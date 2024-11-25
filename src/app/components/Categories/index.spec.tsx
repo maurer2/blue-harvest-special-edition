@@ -29,24 +29,13 @@ describe('Categories', () => {
   it('should render', async () => {
     await renderSeverComponent();
 
-    screen.debug();
-
     expect(screen.getByLabelText('List of categories')).toBeInTheDocument();
   });
 
-  // it('should render home button', async () => {
-  //   await renderSeverComponent();
+  it('should render list of menu links', async () => {
+    await renderSeverComponent();
 
-  //   expect(
-  //     screen.getByRole('heading', { level: 1, name: 'Blue Harvest (SE)' }),
-  //   ).toBeInTheDocument();
-  //   expect(screen.getByRole('link', { name: 'Blue Harvest (SE)' })).toHaveAttribute('href', '/');
-  // });
-
-  // it('should render list if menu links', async () => {
-  //   await renderSeverComponent();
-
-  //   expect(screen.getByRole('list')).toBeInTheDocument();
-  //   expect(screen.getAllByRole('listitem')).toHaveLength(2);
-  // });
+    expect(screen.getByRole('list')).toBeInTheDocument();
+    expect(screen.getAllByRole('listitem')).toHaveLength(2);
+  });
 });
