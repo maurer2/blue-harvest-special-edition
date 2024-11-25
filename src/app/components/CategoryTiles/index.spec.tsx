@@ -2,9 +2,9 @@ import { expect, describe, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import type { ComponentPropsWithoutRef } from 'react';
 
-import Categories from '.';
+import CategoryTiles from '.';
 
-type CategoriesProps = ComponentPropsWithoutRef<typeof Categories>;
+type CategoryTilesProps = ComponentPropsWithoutRef<typeof CategoryTiles>;
 
 vi.mock('next/navigation', () => ({
   usePathname() {
@@ -13,15 +13,15 @@ vi.mock('next/navigation', () => ({
 }));
 
 describe('Categories', () => {
-  const props: CategoriesProps = {
+  const props: CategoryTilesProps = {
     categories: {
       category1: 'http://www.category1.co.uk',
       category2: 'http://www.category2.co.uk',
     },
   };
 
-  async function renderSeverComponent(currentProps: CategoriesProps = props) {
-    const component = await Categories({ ...currentProps });
+  async function renderSeverComponent(currentProps: CategoryTilesProps = props) {
+    const component = await CategoryTiles({ ...currentProps });
 
     return render(component);
   }
@@ -32,10 +32,12 @@ describe('Categories', () => {
     expect(screen.getByLabelText('List of categories')).toBeInTheDocument();
   });
 
-  it('should render list of menu links', async () => {
+  it('should render list of menu links with icon', async () => {
     await renderSeverComponent();
 
     expect(screen.getByRole('list')).toBeInTheDocument();
     expect(screen.getAllByRole('listitem')).toHaveLength(2);
+
+    screen.debug();
   });
 });

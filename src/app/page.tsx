@@ -1,7 +1,7 @@
 import fetcher from './helpers/fetcher';
 import type { RootCategories } from './schemas/root-categories';
 import rootCategoriesSchema from './schemas/root-categories';
-import Categories from './components/Categories';
+import CategoryTiles from './components/CategoryTiles';
 import Navigation from './components/Navigation';
 
 export default async function Home() {
@@ -16,7 +16,7 @@ export default async function Home() {
         <Navigation categories={null} />
       </nav>
       <main className="m-6">
-        <Categories categories={categories} />
+        <CategoryTiles categories={categories} />
       </main>
     </div>
   );
