@@ -21,7 +21,7 @@ async function CategoryDetailsHeader({
 
   return (
     <>
-      <h2 className="col-span-full mb-6 text-xl capitalize">{category}</h2>
+      <h2 className="mb-6 text-xl capitalize">{category}</h2>
       <div className="flex gap-6">
         <Link
           href={`/categories/${category}/${currentPageAsNumber - 1}`}
@@ -35,7 +35,10 @@ async function CategoryDetailsHeader({
         >
           Previous page
         </Link>
-        <p className="grow-1 flex grow items-center bg-gray-100 px-4 py-2 text-center">
+        <p
+          className="grow-1 flex grow items-center bg-gray-100 px-4 py-2 text-center"
+          data-testid="current-page-number"
+        >
           <span className="grow">{pageNumber}</span>
         </p>
         <Link
