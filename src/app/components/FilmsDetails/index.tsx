@@ -9,7 +9,7 @@ type FilmsDetailsProps = {
 
 async function FilmsDetails({ details, index }: FilmsDetailsProps): Promise<ReactElement> {
   const planetDetails = filmsSchema.safeParse(details);
-  const prefix = `films-details-${index}`;
+  const prefix = `film-details-${index}`;
 
   if (!planetDetails.success) {
     return <p>Details couldn't be loaded.</p>;

@@ -7,9 +7,9 @@ type VehiclesDetailsProps = {
   index: number;
 };
 
-async function SpeciesDetails({ details, index }: VehiclesDetailsProps): Promise<ReactElement> {
+async function VehiclesDetails({ details, index }: VehiclesDetailsProps): Promise<ReactElement> {
   const vehiclesDetails = vehiclesSchema.safeParse(details);
-  const prefix = `vehicles-details-${index}`;
+  const prefix = `vehicle-details-${index}`;
 
   if (!vehiclesDetails.success) {
     return <p>Details couldn't be loaded.</p>;
@@ -44,4 +44,4 @@ async function SpeciesDetails({ details, index }: VehiclesDetailsProps): Promise
   );
 }
 
-export default SpeciesDetails;
+export default VehiclesDetails;

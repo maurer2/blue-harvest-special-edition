@@ -16,6 +16,9 @@ const categoriesMap = {
   people: lazy(() => import('../components/PeopleDetails')),
   planets: lazy(() => import('../components/PlanetsDetails')),
   films: lazy(() => import('../components/FilmsDetails')),
+  species: lazy(() => import('../components/SpeciesDetails')),
+  vehicles: lazy(() => import('../components/VehiclesDetails')),
+  starships: lazy(() => import('../components/StarshipsDetails')),
 };
 
 export default async function Category({ params }: CategoryProps) {
