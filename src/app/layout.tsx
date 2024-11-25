@@ -1,6 +1,7 @@
 import type { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+
 import { server } from './mocks/server';
 import './globals.css';
 

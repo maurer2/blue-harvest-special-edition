@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ReactElement } from 'react';
+
 import NavigationEntry from '../NavigationEntry';
 
 type NavigationProps = {
@@ -19,7 +20,7 @@ async function Navigation({ categories }: NavigationProps): Promise<ReactElement
       </h1>
 
       {entries.length ? (
-        <ul className="flex flex-wrap gap-4 sm:flex-nowrap" role="list">
+        <ul className="flex flex-wrap gap-6 sm:flex-nowrap" role="list">
           {entries.map(([name]) => (
             <li key={name} role="listitem">
               <NavigationEntry name={name} />

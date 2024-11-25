@@ -11,7 +11,7 @@ export default async function Home() {
   );
 
   return (
-    <div className="min-h-screen bg-teal-50 pb-32">
+    <div className="min-h-screen pb-32">
       <nav className="mb-4 bg-teal-300 p-6">
         <Navigation categories={null} />
       </nav>
