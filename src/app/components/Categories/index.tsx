@@ -13,9 +13,13 @@ async function Categories({ categories }: CategoriesProps): Promise<ReactElement
   }
 
   return (
-    <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+    <ul
+      className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
+      role="list"
+      aria-label="List of categories"
+    >
       {entries.map(([name]) => (
-        <li className="contents" key={name}>
+        <li className="contents" key={name} role="listitem">
           <Link
             href={`/${name}/1`}
             className="flex aspect-square items-center justify-center border p-4 text-center capitalize hover:border-teal-300 hover:text-teal-300"
