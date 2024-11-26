@@ -6,7 +6,7 @@ import CategoryDetailsHeader from '../../components/CategoryDetailsHeader';
 import fetcher from '../../helpers/fetcher';
 import type { RootCategories } from '../../schemas/root-categories';
 import rootCategoriesSchema from '../../schemas/root-categories';
-import pageSchema, { type Page } from '../../schemas/page';
+import payloadSchema, { type Payload } from '../../schemas/payload';
 
 type CategoryProps = {
   params: Promise<{ slug: string[] }>;
@@ -35,16 +35,16 @@ export default async function Category({ params }: CategoryProps) {
     'https://swapi.dev/api',
     rootCategoriesSchema,
   );
-  const response: Page | null = await fetcher(
+  const response: Payload | null = await fetcher(
     `https://swapi.dev/api/${category}?page=${pageNumber}`,
-    pageSchema,
+    payloadSchema,
   );
 
   if (!response) {
     return notFound();
   }
 
-  const entries: Page['results'] = response?.results ?? [];
+  const entries: Payload['results'] = response?.results ?? [];
   const nextPage = response?.next ?? null;
   const previousPage = response?.previous ?? null;
 

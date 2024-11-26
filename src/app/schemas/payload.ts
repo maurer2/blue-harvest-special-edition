@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const pageSchema = z.object({
+const payloadSchema = z.object({
   count: z.number(),
   next: z.string().nullable(),
   previous: z.string().nullable(),
@@ -23,5 +23,5 @@ const pageSchema = z.object({
     ),
 });
 
-export default pageSchema;
-export type Page = z.infer<typeof pageSchema>;
+export default payloadSchema;
+export type Payload = z.infer<typeof payloadSchema>;
