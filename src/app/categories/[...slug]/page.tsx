@@ -72,7 +72,7 @@ export default async function Category({ params }: CategoryProps) {
             {entries.map((entry, index) => (
               <li
                 className="overflow-hidden border p-4"
-                key={entry.name || entry.title}
+                key={(entry.name as string) || (entry.title as string)}
                 role="listitem"
               >
                 <ComponentForCategory details={entry} index={index} />

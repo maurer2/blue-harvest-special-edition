@@ -8,7 +8,8 @@
     "format": "prettier --write './**/*.{js,jsx,mjs,cjs,ts,tsx,json}' ",
     "lint": "next lint",
     "start": "next start",
-    "test": "vitest"
+    "test": "vitest",
+    "test:types": "tsc --noEmit"
   },
   "dependencies": {
     "clsx": "^2.1.1",
