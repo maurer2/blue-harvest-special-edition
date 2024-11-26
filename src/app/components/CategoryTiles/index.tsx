@@ -28,12 +28,16 @@ async function CategoryTiles({ categories }: CategoryTilesProps): Promise<ReactE
   }
 
   return (
-    <ul className="flex flex-wrap gap-6" role="list" aria-label="List of categories">
+    <ul
+      className="grid grid-cols-[repeat(auto-fill,minmax(128px,1fr))] gap-6"
+      role="list"
+      aria-label="List of categories"
+    >
       {entries.map(([name]) => (
         <li className="contents" key={name} role="listitem">
           <Link
             href={`/categories/${name}/1`}
-            className="flex aspect-square basis-32 flex-col items-center justify-center gap-4 border p-4 capitalize hover:border-teal-300 hover:text-teal-300"
+            className="flex aspect-square flex-col items-center justify-center gap-4 border p-4 capitalize hover:border-teal-300 hover:text-teal-300"
           >
             {name in iconMap ? iconMap[name as keyof typeof iconMap] : null}
             {name}
