@@ -16,7 +16,10 @@ async function Navigation({ categories }: NavigationProps): Promise<ReactElement
       aria-label="Main navigation with Home button"
     >
       <h1>
-        <Link href="/" className="underline-offset-4 hover:underline">
+        <Link
+          href="/"
+          className="capitalize underline-offset-4 outline-none hover:text-white hover:underline focus-visible:text-white focus-visible:underline"
+        >
           Blue Harvest (SE)
         </Link>
       </h1>

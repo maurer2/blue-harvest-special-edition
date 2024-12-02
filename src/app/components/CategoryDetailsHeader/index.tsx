@@ -26,7 +26,7 @@ async function CategoryDetailsHeader({
         <Link
           href={`/categories/${category}/${currentPageAsNumber - 1}`}
           className={clsx(
-            'item-hover:border-gray flex grow-0 items-center border bg-teal-300 px-4 py-2 hover:bg-transparent',
+            'item-hover:border-gray flex grow-0 items-center border p-4 px-4 py-2 capitalize outline-none hover:border-teal-300 hover:bg-transparent hover:text-teal-300 focus-visible:border-teal-300 focus-visible:text-teal-300',
             {
               'line-through opacity-50': !hasPrevPage,
             },
@@ -38,13 +38,14 @@ async function CategoryDetailsHeader({
         <p
           className="grow-1 flex grow items-center bg-gray-100 px-4 py-2 text-center"
           data-testid="current-page-number"
+          aria-label="Current page number"
         >
           <span className="grow">{pageNumber}</span>
         </p>
         <Link
           href={`/categories/${category}/${currentPageAsNumber + 1}`}
           className={clsx(
-            'hover:border-gray flex grow-0 items-center border bg-teal-300 px-4 py-2 hover:bg-transparent',
+            'item-hover:border-gray flex grow-0 items-center border p-4 px-4 py-2 capitalize outline-none hover:border-teal-300 hover:bg-transparent hover:text-teal-300 focus-visible:border-teal-300 focus-visible:text-teal-300',
             {
               'line-through opacity-50': !hasNextPage,
             },

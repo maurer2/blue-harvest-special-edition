@@ -16,9 +16,12 @@ function NavigationEntry({ name }: NavigationEntryProps): ReactElement {
   return (
     <Link
       href={`/categories/${name}/1`}
-      className={clsx('capitalize underline-offset-4 hover:underline', {
-        underline: isActive,
-      })}
+      className={clsx(
+        'capitalize underline-offset-4 outline-none hover:text-white hover:underline focus-visible:text-white focus-visible:underline',
+        {
+          underline: isActive,
+        },
+      )}
       aria-current={isActive ? 'page' : undefined}
     >
       {name}

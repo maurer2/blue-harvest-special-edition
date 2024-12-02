@@ -37,7 +37,7 @@ async function CategoryTiles({ categories }: CategoryTilesProps): Promise<ReactE
         <li className="contents" key={name} role="listitem">
           <Link
             href={`/categories/${name}/1`}
-            className="flex aspect-square flex-col items-center justify-center gap-4 border p-4 capitalize hover:border-teal-300 hover:text-teal-300"
+            className="outline:teal-300 flex aspect-square flex-col items-center justify-center gap-4 border p-4 capitalize outline-none hover:border-teal-300 hover:text-teal-300 focus-visible:border-teal-300 focus-visible:text-teal-300"
           >
             {name in iconMap ? iconMap[name as keyof typeof iconMap] : null}
             {name}
