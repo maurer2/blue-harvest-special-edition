@@ -1,5 +1,5 @@
 import { expect, describe, it, beforeAll, afterEach, afterAll, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import type { ComponentPropsWithoutRef } from 'react';
 import { setupServer } from 'msw/node';
 import { http, HttpResponse } from 'msw';
@@ -99,7 +99,10 @@ describe('CategoryPage', () => {
     expect(await screen.findByTestId('navigation-component')).toBeInTheDocument();
     expect(await screen.findByTestId('category-details-header-component')).toBeInTheDocument();
     expect(await screen.findByTestId('people-details-component')).toBeInTheDocument();
-    expect(await screen.findByRole('list')).toBeInTheDocument();
+    expect(await screen.findByRole('grid', { name: 'List of results' })).toBeInTheDocument();
+
+    const { findAllByRole } = within(screen.getByRole('grid', { name: 'List of results' }));
+    expect((await findAllByRole('gridcell')).length).toBeGreaterThan(0);
   });
 
   it('should redirect to the 404 page if response for current category can not be loaded', async () => {

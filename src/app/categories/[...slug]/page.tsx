@@ -50,11 +50,11 @@ export default async function Category({ params }: CategoryProps) {
 
   return (
     <>
-      <nav className="mb-4 bg-teal-300 p-6">
+      <nav className="mb-6 bg-teal-300 p-6">
         <Navigation categories={categories} />
       </nav>
 
-      <main className="m-6">
+      <main className="m-6 max-w-[calc(1920px-theme(spacing.6)-theme(spacing.6))]">
         <div className="mb-6">
           <CategoryDetailsHeader
             category={category}
@@ -66,14 +66,15 @@ export default async function Category({ params }: CategoryProps) {
 
         {entries.length ? (
           <ol
-            className="mb-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
-            role="list"
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+            role="grid"
+            aria-label="List of results"
           >
             {entries.map((entry, index) => (
               <li
                 className="overflow-hidden border p-4"
                 key={(entry.name as string) || (entry.title as string)}
-                role="listitem"
+                role="gridcell"
               >
                 <ComponentForCategory details={entry} index={index} />
               </li>
