@@ -40,6 +40,8 @@
         "javascript.inlayHints.parameterTypes.enabled": true,
         "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
         "javascript.inlayHints.enumMemberValues.enabled": true,
+        // eslint
+        "eslint.useFlatConfig": false,
         // markdown
         "markdown.preview.scrollEditorWithPreview": true,
         "markdown.preview.scrollPreviewWithEditor": true,
