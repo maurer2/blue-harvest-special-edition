@@ -1,8 +1,9 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { notFound } from 'next/navigation';
 
 import Navigation from '../../components/Navigation';
 import CategoryDetailsHeader from '../../components/CategoryDetailsHeader';
+import DetailsToggle from '../../components/DetailsToggle';
 import fetcher from '../../helpers/fetcher';
 import type { RootCategories } from '../../schemas/root-categories';
 import rootCategoriesSchema from '../../schemas/root-categories';
@@ -65,21 +66,25 @@ export default async function Category({ params }: CategoryProps) {
         </div>
 
         {entries.length ? (
-          <ol
-            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
-            role="grid"
-            aria-label="List of results"
-          >
-            {entries.map((entry, index) => (
-              <li
-                className="overflow-hidden border p-4"
-                key={(entry.name as string) || (entry.title as string)}
-                role="gridcell"
-              >
-                <ComponentForCategory details={entry} index={index} />
-              </li>
-            ))}
-          </ol>
+          <Suspense>
+            <ol
+              className="grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+              role="grid"
+              aria-label="List of results"
+            >
+              {entries.map((entry, index) => (
+                <li
+                  className="overflow-hidden border p-4"
+                  key={(entry.name as string) || (entry.title as string)}
+                  role="gridcell"
+                >
+                  <DetailsToggle toggleText={(entry.name as string) || (entry.title as string)}>
+                    <ComponentForCategory details={entry} index={index} />
+                  </DetailsToggle>
+                </li>
+              ))}
+            </ol>
+          </Suspense>
         ) : (
           <p>No entries found for this category.</p>
         )}
