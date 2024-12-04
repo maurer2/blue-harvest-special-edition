@@ -3,23 +3,22 @@
 import type { ReactElement } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { UnfoldVertical, FoldVertical } from 'lucide-react';
-
-const expandedParamName = 'expanded';
+import { QUERY_PARAM_KEYS } from '@/app/categories/[...slug]/constants';
 
 function ToggleBar(): ReactElement {
   const searchParams = useSearchParams();
-  const hasExpandedParam = searchParams.get(expandedParamName) !== null;
+  const hasExpandedParam = searchParams.get(QUERY_PARAM_KEYS.EXPANDED) !== null;
 
   const handleClick = () => {
     const newSearchParams = new URLSearchParams(searchParams.toString());
 
     if (hasExpandedParam) {
-      newSearchParams.delete(expandedParamName);
+      newSearchParams.delete(QUERY_PARAM_KEYS.EXPANDED);
     } else {
-      newSearchParams.append(expandedParamName, '');
+      newSearchParams.append(QUERY_PARAM_KEYS.EXPANDED, '');
     }
 
-    const newQueryStringClean = `?${newSearchParams.toString().replace(`${expandedParamName}=`, `${expandedParamName}`)}`;
+    const newQueryStringClean = `?${newSearchParams.toString().replace(`${QUERY_PARAM_KEYS.EXPANDED}=`, `${QUERY_PARAM_KEYS.EXPANDED}`)}`;
     window.history.replaceState(null, '', newQueryStringClean);
   };
 

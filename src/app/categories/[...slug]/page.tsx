@@ -4,13 +4,16 @@ import { notFound } from 'next/navigation';
 import Navigation from '../../components/Navigation';
 import CategoryDetailsHeader from '../../components/CategoryDetailsHeader';
 import DetailsToggle from '../../components/DetailsToggle';
+import ToggleBar from '../../components/ToggleBar';
 import fetcher from '../../helpers/fetcher';
 import type { RootCategories } from '../../schemas/root-categories';
 import rootCategoriesSchema from '../../schemas/root-categories';
 import payloadSchema, { type Payload } from '../../schemas/payload';
+import { QUERY_PARAM_KEYS } from './constants';
 
 type CategoryProps = {
   params: Promise<{ slug: string[] }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 const categoriesMap = {
@@ -22,9 +25,10 @@ const categoriesMap = {
   starships: lazy(() => import('../../components/StarshipsDetails')),
 };
 
-export default async function Category({ params }: CategoryProps) {
+export default async function Category({ params, searchParams }: CategoryProps) {
   const category = (await params).slug[0];
   const pageNumber = (await params).slug[1];
+  const hasExpandedParam = ((await searchParams)?.[QUERY_PARAM_KEYS.EXPANDED] ?? null) !== null;
 
   const ComponentForCategory =
     category in categoriesMap ? categoriesMap[category as keyof typeof categoriesMap] : null;
@@ -62,13 +66,15 @@ export default async function Category({ params }: CategoryProps) {
             pageNumber={pageNumber}
             nextPage={nextPage}
             previousPage={previousPage}
+            hasExpandedParam={hasExpandedParam}
           />
         </div>
 
         {entries.length ? (
           <Suspense>
+            <ToggleBar />
             <ol
-              className="grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+              className="mt-6 grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
               role="grid"
               aria-label="List of results"
             >

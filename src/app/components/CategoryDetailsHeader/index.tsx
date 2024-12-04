@@ -1,12 +1,14 @@
 import type { ReactElement } from 'react';
 import Link from 'next/link';
 import { clsx } from 'clsx';
+import { QUERY_PARAM_KEYS } from '../../categories/[...slug]/constants';
 
 type CategoryDetailsHeaderProps = {
   category: string;
   pageNumber: string;
   nextPage: string | null;
   previousPage: string | null;
+  hasExpandedParam: boolean;
 };
 
 async function CategoryDetailsHeader({
@@ -14,17 +16,20 @@ async function CategoryDetailsHeader({
   pageNumber,
   nextPage,
   previousPage,
+  hasExpandedParam,
 }: CategoryDetailsHeaderProps): Promise<ReactElement> {
   const currentPageAsNumber = parseInt(pageNumber, 10);
   const hasNextPage = nextPage !== null;
   const hasPrevPage = previousPage !== null;
+
+  const newQueryParam = hasExpandedParam ? `?${QUERY_PARAM_KEYS.EXPANDED}` : '';
 
   return (
     <>
       <h2 className="mb-6 text-xl capitalize">{category}</h2>
       <div className="flex gap-6">
         <Link
-          href={`/categories/${category}/${currentPageAsNumber - 1}`}
+          href={`/categories/${category}/${currentPageAsNumber - 1}${newQueryParam}`}
           className={clsx(
             'item-hover:border-gray flex grow-0 items-center border p-4 px-4 py-2 capitalize outline-none hover:border-teal-300 hover:bg-transparent hover:text-teal-300 focus-visible:border-teal-300 focus-visible:text-teal-300',
             {
@@ -43,7 +48,7 @@ async function CategoryDetailsHeader({
           <span className="grow">{pageNumber}</span>
         </p>
         <Link
-          href={`/categories/${category}/${currentPageAsNumber + 1}`}
+          href={`/categories/${category}/${currentPageAsNumber + 1}${newQueryParam}`}
           className={clsx(
             'item-hover:border-gray flex grow-0 items-center border p-4 px-4 py-2 capitalize outline-none hover:border-teal-300 hover:bg-transparent hover:text-teal-300 focus-visible:border-teal-300 focus-visible:text-teal-300',
             {
