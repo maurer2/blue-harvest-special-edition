@@ -28,7 +28,7 @@ const categoriesMap = {
 export default async function Category({ params, searchParams }: CategoryProps) {
   const category = (await params).slug[0];
   const pageNumber = (await params).slug[1];
-  const hasExpandedParam = ((await searchParams)?.[QUERY_PARAM_KEYS.EXPANDED] ?? null) !== null;
+  const expandedParam = (await searchParams)?.[QUERY_PARAM_KEYS.EXPANDED];
 
   const ComponentForCategory =
     category in categoriesMap ? categoriesMap[category as keyof typeof categoriesMap] : null;
@@ -52,6 +52,7 @@ export default async function Category({ params, searchParams }: CategoryProps) 
   const entries: Payload['results'] = response?.results ?? [];
   const nextPage = response?.next ?? null;
   const previousPage = response?.previous ?? null;
+  const hasExpandedParam = (expandedParam ?? null) !== null;
 
   return (
     <>
