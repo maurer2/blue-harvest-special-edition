@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { notFound } from 'next/navigation';
+import { LoaderCircle } from 'lucide-react';
 
 import Navigation from '../../components/Navigation';
 import CategoryDetailsHeader from '../../components/CategoryDetailsHeader';
@@ -72,7 +73,15 @@ export default async function Category({ params, searchParams }: CategoryProps) 
         </div>
 
         {entries.length ? (
-          <Suspense>
+          <Suspense
+            fallback={
+              <LoaderCircle
+                aria-label="Loading a new page"
+                className="animate-spin text-gray-300"
+                size={64}
+              />
+            }
+          >
             <ToggleBar />
             <ol
               className="mt-6 grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
@@ -85,7 +94,11 @@ export default async function Category({ params, searchParams }: CategoryProps) 
                   key={(entry.name as string) || (entry.title as string)}
                   role="gridcell"
                 >
-                  <DetailsToggle toggleText={(entry.name as string) || (entry.title as string)}>
+                  <DetailsToggle
+                    toggleText={(entry.name as string) || (entry.title as string)}
+                    hasForceExpand={hasExpandedParam}
+                    key={hasExpandedParam.toString()}
+                  >
                     <ComponentForCategory details={entry} index={index} />
                   </DetailsToggle>
                 </li>
