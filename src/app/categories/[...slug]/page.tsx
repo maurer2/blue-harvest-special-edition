@@ -68,6 +68,7 @@ export default async function Category({ params, searchParams }: CategoryProps) 
             pageNumber={pageNumber}
             nextPage={nextPage}
             previousPage={previousPage}
+            hasExpandedParam={hasExpandedParam}
           />
         </div>
 
