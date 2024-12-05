@@ -68,7 +68,6 @@ export default async function Category({ params, searchParams }: CategoryProps) 
             pageNumber={pageNumber}
             nextPage={nextPage}
             previousPage={previousPage}
-            hasExpandedParam={hasExpandedParam}
           />
         </div>
 
@@ -84,13 +83,13 @@ export default async function Category({ params, searchParams }: CategoryProps) 
           >
             <ToggleBar />
             <ol
-              className="mt-6 grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+              className="mt-6 grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 has-[*>details[open]]:items-stretch"
               role="grid"
               aria-label="List of results"
             >
               {entries.map((entry, index) => (
                 <li
-                  className="overflow-hidden border p-4"
+                  className="contents"
                   key={(entry.name as string) || (entry.title as string)}
                   role="gridcell"
                 >
