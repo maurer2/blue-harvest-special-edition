@@ -5,9 +5,11 @@ import { FoldVertical, UnfoldVertical } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import type { ReactElement } from 'react';
 
-import revalidateCategoryPage from '../../server-functions/revalidate-category-page';
+type ToggleBarProps = {
+  onRevalidateCurrentCategoryPage: () => Promise<void>;
+};
 
-function ToggleBar(): ReactElement {
+function ToggleBar({ onRevalidateCurrentCategoryPage }: ToggleBarProps): ReactElement {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -22,10 +24,9 @@ function ToggleBar(): ReactElement {
       newSearchParams.append(QUERY_PARAM_KEYS.EXPANDED, '');
     }
 
-    const newQueryString = `?${newSearchParams.toString().replace(`${QUERY_PARAM_KEYS.EXPANDED}=`, `${QUERY_PARAM_KEYS.EXPANDED}`)}`;
-    window.history.replaceState(null, '', newQueryString);
+    window.history.replaceState(null, '', `?${newSearchParams.toString()}`);
 
-    await revalidateCategoryPage();
+    await onRevalidateCurrentCategoryPage();
     router.refresh();
   };
 

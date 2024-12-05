@@ -1,4 +1,5 @@
 import { LoaderCircle } from 'lucide-react';
+import { revalidatePath } from 'next/cache';
 import { notFound } from 'next/navigation';
 import { Suspense, lazy } from 'react';
 
@@ -50,6 +51,12 @@ export default async function Category({ params, searchParams }: CategoryProps) 
     return notFound();
   }
 
+  const revalidateCurrentCategoryPage = async () => {
+    'use server';
+
+    revalidatePath('/categories/[...slug]', 'page');
+  };
+
   const entries: Payload['results'] = response?.results ?? [];
   const nextPage = response?.next ?? null;
   const previousPage = response?.previous ?? null;
@@ -82,7 +89,7 @@ export default async function Category({ params, searchParams }: CategoryProps) 
               />
             }
           >
-            <ToggleBar />
+            <ToggleBar onRevalidateCurrentCategoryPage={revalidateCurrentCategoryPage} />
             <ol
               className="mt-6 grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 has-[*>details[open]]:items-stretch"
               role="grid"
