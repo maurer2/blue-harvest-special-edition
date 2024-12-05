@@ -5,15 +5,15 @@ import { useState, type ReactElement, type PropsWithChildren } from 'react';
 
 type DetailsToggleProps = PropsWithChildren<{
   toggleText: string;
-  // isExpanded: boolean;
+  hasForceExpand: boolean;
 }>;
 
-function DetailsToggle({ toggleText, children }: DetailsToggleProps): ReactElement {
-  const [isExpanded, setIsExpanded] = useState(false);
+function DetailsToggle({ toggleText, hasForceExpand, children }: DetailsToggleProps): ReactElement {
+  const [isExpanded, setIsExpanded] = useState(hasForceExpand);
 
   return (
     <details open={isExpanded} onToggle={(event) => setIsExpanded(event.currentTarget.open)}>
-      <summary className="marker:text-teal-300">{toggleText}</summary>
+      <summary className="cursor-pointer marker:text-teal-300">{toggleText}</summary>
       <div className="mt-2">{children}</div>
     </details>
   );

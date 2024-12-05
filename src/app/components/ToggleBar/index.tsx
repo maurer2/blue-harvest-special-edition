@@ -37,11 +37,12 @@ function ToggleBar(): ReactElement {
         aria-checked={hasExpandedParam}
         id="toggle-bar-button"
         aria-label="Toggle expand and collapse state of entries"
+        className="cursor-pointer"
       >
         {hasExpandedParam ? <UnfoldVertical aria-hidden /> : <FoldVertical aria-hidden />}
       </button>
-      <label htmlFor="toggle-bar-button">
-        {hasExpandedParam ? 'All entries are expanded' : 'All entries are collapsed'}
+      <label htmlFor="toggle-bar-button" className="cursor-pointer">
+        {hasExpandedParam ? 'Collapse all entries' : 'Expand all entries'}
       </label>
     </div>
   );
