@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, type ReactElement, type PropsWithChildren } from 'react';
+import { type PropsWithChildren, type ReactElement, useState } from 'react';
+
 // import { clsx } from 'clsx';
 
 type DetailsToggleProps = PropsWithChildren<{

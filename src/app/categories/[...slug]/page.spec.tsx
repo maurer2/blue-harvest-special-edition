@@ -1,9 +1,9 @@
-import { expect, describe, it, beforeAll, afterEach, afterAll, vi } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
-import type { ComponentPropsWithoutRef } from 'react';
+import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
-import { http, HttpResponse } from 'msw';
 import { notFound } from 'next/navigation';
+import type { ComponentPropsWithoutRef } from 'react';
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 
 import CategoryPage from './page';
 
@@ -63,6 +63,10 @@ vi.mock('../../components/PeopleDetails', () => ({
 
 vi.mock('next/navigation', () => ({
   notFound: vi.fn(),
+  useSearchParams: vi.fn().mockImplementation(() => new URLSearchParams()),
+  useRouter: vi.fn(() => ({
+    refresh: vi.fn(),
+  })),
 }));
 
 export const server = setupServer();
@@ -70,6 +74,7 @@ export const server = setupServer();
 describe('CategoryPage', () => {
   const props: CategoryPageProps = {
     params: Promise.resolve({ slug: ['people', '1'] }),
+    searchParams: Promise.resolve({ expanded: '' }),
   };
 
   async function renderSeverComponent(currentProps: CategoryPageProps = props) {
@@ -134,6 +139,7 @@ describe('CategoryPage', () => {
 
     await renderSeverComponent({
       params: Promise.resolve({ slug: ['meow', '1'] }),
+      searchParams: Promise.resolve({ expanded: '' }),
     });
 
     expect(notFound).toHaveBeenCalled();

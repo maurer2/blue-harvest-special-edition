@@ -1,9 +1,10 @@
 'use client';
 
-import type { ReactElement } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { UnfoldVertical, FoldVertical } from 'lucide-react';
 import { QUERY_PARAM_KEYS } from '@/app/categories/[...slug]/constants';
+import { FoldVertical, UnfoldVertical } from 'lucide-react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import type { ReactElement } from 'react';
+
 import revalidateCategoryPage from '../../server-functions/revalidate-category-page';
 
 function ToggleBar(): ReactElement {

@@ -1,15 +1,15 @@
-import { lazy, Suspense } from 'react';
-import { notFound } from 'next/navigation';
 import { LoaderCircle } from 'lucide-react';
+import { notFound } from 'next/navigation';
+import { Suspense, lazy } from 'react';
 
-import Navigation from '../../components/Navigation';
 import CategoryDetailsHeader from '../../components/CategoryDetailsHeader';
 import DetailsToggle from '../../components/DetailsToggle';
+import Navigation from '../../components/Navigation';
 import ToggleBar from '../../components/ToggleBar';
 import fetcher from '../../helpers/fetcher';
+import payloadSchema, { type Payload } from '../../schemas/payload';
 import type { RootCategories } from '../../schemas/root-categories';
 import rootCategoriesSchema from '../../schemas/root-categories';
-import payloadSchema, { type Payload } from '../../schemas/payload';
 import { QUERY_PARAM_KEYS } from './constants';
 
 type CategoryProps = {

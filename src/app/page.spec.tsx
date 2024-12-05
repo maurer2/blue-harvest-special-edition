@@ -1,7 +1,7 @@
-import { expect, describe, it, beforeAll, afterEach, afterAll, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
-import { http, HttpResponse } from 'msw';
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 
 import HomePage from './page';
 

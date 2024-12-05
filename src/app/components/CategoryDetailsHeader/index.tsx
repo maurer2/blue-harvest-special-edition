@@ -1,6 +1,7 @@
-import type { ReactElement } from 'react';
-import Link from 'next/link';
 import { clsx } from 'clsx';
+import Link from 'next/link';
+import type { ReactElement } from 'react';
+
 import { QUERY_PARAM_KEYS } from '../../categories/[...slug]/constants';
 
 type CategoryDetailsHeaderProps = {

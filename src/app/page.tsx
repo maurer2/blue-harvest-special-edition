@@ -1,8 +1,8 @@
+import CategoryTiles from './components/CategoryTiles';
+import Navigation from './components/Navigation';
 import fetcher from './helpers/fetcher';
 import type { RootCategories } from './schemas/root-categories';
 import rootCategoriesSchema from './schemas/root-categories';
-import CategoryTiles from './components/CategoryTiles';
-import Navigation from './components/Navigation';
 
 export default async function Home() {
   const categories: RootCategories | null = await fetcher(

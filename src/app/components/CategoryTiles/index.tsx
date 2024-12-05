@@ -1,6 +1,6 @@
-import type { ReactElement } from 'react';
+import { Car, Cat, Eclipse, Film, type LucideProps, Rocket, Users } from 'lucide-react';
 import Link from 'next/link';
-import { Users, Eclipse, Film, Cat, Car, Rocket, type LucideProps } from 'lucide-react';
+import type { ReactElement } from 'react';
 
 type CategoryTilesProps = {
   categories: Record<string, string> | null;

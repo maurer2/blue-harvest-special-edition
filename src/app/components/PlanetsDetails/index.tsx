@@ -1,4 +1,5 @@
 import type { ReactElement } from 'react';
+
 import planetsSchema from '../../schemas/planets';
 
 type PlanetDetailsProps = {

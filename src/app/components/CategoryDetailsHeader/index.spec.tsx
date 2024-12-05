@@ -1,6 +1,6 @@
-import { expect, describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import type { ComponentPropsWithoutRef } from 'react';
+import { describe, expect, it } from 'vitest';
 
 import CategoryDetailsHeader from '.';
 
@@ -12,6 +12,7 @@ describe('CategoryDetailsHeader', () => {
     pageNumber: '1',
     nextPage: 'http://www.category1.co.uk',
     previousPage: 'http://www.category1.co.uk',
+    hasExpandedParam: false,
   };
 
   async function renderSeverComponent(currentProps: CategoryDetailsHeaderProps = props) {
