@@ -26,7 +26,7 @@ function CategoryDetailsHeader({
 
   return (
     <header aria-label="Category title and category level navigation">
-      <h2 className="mb-6 text-xl capitalize">{category}</h2>
+      <h1 className="mb-6 text-xl capitalize">{category}</h1>
       <div className="flex gap-6">
         <Link
           href={`/categories/${category}/${currentPageAsNumber - 1}?${searchParams}`}

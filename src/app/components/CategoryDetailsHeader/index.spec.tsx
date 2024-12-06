@@ -29,7 +29,7 @@ describe('CategoryDetailsHeader', () => {
   it('should render title of current category', async () => {
     render(<CategoryDetailsHeader {...props} />);
 
-    expect(screen.getByRole('heading', { level: 2, name: 'category' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: 'category' })).toBeInTheDocument();
   });
 
   it('should render previous and next page button with number of current page', async () => {

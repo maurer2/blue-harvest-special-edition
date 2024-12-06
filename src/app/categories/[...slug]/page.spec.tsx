@@ -49,8 +49,8 @@ const peopleCategoryPayload = {
 type CategoryPageProps = ComponentPropsWithoutRef<typeof CategoryPage>;
 
 // mock async child components to make test suite for the page component runnable
-vi.mock('../../components/Navigation', () => ({
-  default: () => <div data-testid="navigation-component">Navigation component</div>,
+vi.mock('../../components/Masthead', () => ({
+  default: () => <div data-testid="masthead-component">Masthead component</div>,
 }));
 vi.mock('../../components/PeopleDetails', () => ({
   default: () => <div data-testid="people-details-component">PeopleDetails component</div>,
@@ -96,7 +96,7 @@ describe('CategoryPage', () => {
 
     await renderSeverComponent();
 
-    expect(await screen.findByTestId('navigation-component')).toBeInTheDocument();
+    expect(await screen.findByTestId('masthead-component')).toBeInTheDocument();
     expect(
       screen.getByLabelText('Category title and category level navigation'),
     ).toBeInTheDocument();

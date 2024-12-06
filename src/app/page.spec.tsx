@@ -15,8 +15,8 @@ const categoriesPayload = {
 };
 
 // mock async child components to make test suite for the page component runnable
-vi.mock('./components/Navigation', () => ({
-  default: () => <div data-testid="navigation-component">Navigation component</div>,
+vi.mock('./components/Masthead', () => ({
+  default: () => <div data-testid="masthead-component">Masthead component</div>,
 }));
 vi.mock('./components/CategoryTiles', () => ({
   default: () => <div data-testid="category-tiles-component">CategoryTiles component</div>,
@@ -44,7 +44,7 @@ describe('HomePage', () => {
 
     await renderSeverComponent();
 
-    expect(await screen.findByTestId('navigation-component')).toBeInTheDocument();
+    expect(await screen.findByTestId('masthead-component')).toBeInTheDocument();
     expect(await screen.findByTestId('category-tiles-component')).toBeInTheDocument();
   });
 });

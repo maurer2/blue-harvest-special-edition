@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import type { ComponentPropsWithoutRef } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
@@ -12,7 +12,7 @@ vi.mock('next/navigation', () => ({
   },
 }));
 
-describe('Navigation', () => {
+describe('Masthead', () => {
   const props: NavigationProps = {
     categories: {
       category1: 'http://www.category1.co.uk',
@@ -29,22 +29,24 @@ describe('Navigation', () => {
   it('should render', async () => {
     await renderSeverComponent();
 
-    expect(screen.getByLabelText('Main navigation with Home button')).toBeInTheDocument();
+    expect(screen.getByRole('banner')).toBeInTheDocument();
   });
 
-  it('should render home button', async () => {
+  it('should render homepage button', async () => {
     await renderSeverComponent();
 
-    expect(
-      screen.getByRole('heading', { level: 1, name: 'Blue Harvest (SE)' }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Blue Harvest (SE)' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Blue Harvest (SE)' })).toHaveAttribute('href', '/');
+    expect(screen.getByRole('link', { name: 'Blue Harvest (SE)' })).toHaveAttribute('title');
   });
 
-  it('should render list of menu links', async () => {
+  it('should render menu links', async () => {
     await renderSeverComponent();
 
-    expect(screen.getByRole('list')).toBeInTheDocument();
-    expect(screen.getAllByRole('listitem')).toHaveLength(2);
+    expect(screen.getByRole('navigation')).toBeInTheDocument();
+
+    const { getAllByRole } = within(screen.getByRole('navigation'));
+
+    expect(getAllByRole('link')).toHaveLength(2);
   });
 });

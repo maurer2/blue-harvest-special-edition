@@ -1,5 +1,5 @@
 import CategoryTiles from './components/CategoryTiles';
-import Navigation from './components/Navigation';
+import Navigation from './components/Masthead';
 import fetcher from './helpers/fetcher';
 import type { RootCategories } from './schemas/root-categories';
 import rootCategoriesSchema from './schemas/root-categories';

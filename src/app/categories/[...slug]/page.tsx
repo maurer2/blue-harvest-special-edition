@@ -5,7 +5,7 @@ import { Suspense, lazy } from 'react';
 
 import CategoryDetailsHeader from '../../components/CategoryDetailsHeader';
 import DetailsToggle from '../../components/DetailsToggle';
-import Navigation from '../../components/Navigation';
+import Masthead from '../../components/Masthead';
 import ToggleBar from '../../components/ToggleBar';
 import fetcher from '../../helpers/fetcher';
 import payloadSchema, { type Payload } from '../../schemas/payload';
@@ -64,9 +64,9 @@ export default async function Category({ params, searchParams }: CategoryProps) 
 
   return (
     <>
-      <nav className="mb-6 bg-teal-300 p-6">
-        <Navigation categories={categories} />
-      </nav>
+      <div className="mb-6">
+        <Masthead categories={categories} />
+      </div>
 
       <main className="m-6 max-w-[calc(1920px-theme(spacing.6)-theme(spacing.6))]">
         <div className="mb-6">
