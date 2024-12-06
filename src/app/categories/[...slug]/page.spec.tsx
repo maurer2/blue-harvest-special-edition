@@ -52,11 +52,6 @@ type CategoryPageProps = ComponentPropsWithoutRef<typeof CategoryPage>;
 vi.mock('../../components/Navigation', () => ({
   default: () => <div data-testid="navigation-component">Navigation component</div>,
 }));
-vi.mock('../../components/CategoryDetailsHeader', () => ({
-  default: () => (
-    <div data-testid="category-details-header-component">CategoryDetailsHeader component</div>
-  ),
-}));
 vi.mock('../../components/PeopleDetails', () => ({
   default: () => <div data-testid="people-details-component">PeopleDetails component</div>,
 }));
@@ -102,7 +97,9 @@ describe('CategoryPage', () => {
     await renderSeverComponent();
 
     expect(await screen.findByTestId('navigation-component')).toBeInTheDocument();
-    expect(await screen.findByTestId('category-details-header-component')).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('Category title and category level navigation'),
+    ).toBeInTheDocument();
     expect(await screen.findByTestId('people-details-component')).toBeInTheDocument();
     expect(await screen.findByRole('grid', { name: 'List of results' })).toBeInTheDocument();
 

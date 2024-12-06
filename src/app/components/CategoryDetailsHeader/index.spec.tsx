@@ -1,56 +1,65 @@
 import { render, screen } from '@testing-library/react';
 import type { ComponentPropsWithoutRef } from 'react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import CategoryDetailsHeader from '.';
 
 type CategoryDetailsHeaderProps = ComponentPropsWithoutRef<typeof CategoryDetailsHeader>;
 
+vi.mock('next/navigation', () => ({
+  useSearchParams: vi.fn().mockImplementation(() => new URLSearchParams()),
+}));
+
 describe('CategoryDetailsHeader', () => {
   const props: CategoryDetailsHeaderProps = {
     category: 'category',
-    pageNumber: '1',
-    nextPage: 'http://www.category1.co.uk',
-    previousPage: 'http://www.category1.co.uk',
-    hasExpandedParam: false,
+    pageNumber: '2',
+    nextPage: 'http://www.meow.co.uk/category/1',
+    previousPage: 'http://www.meow.co.uk/category/3',
   };
 
-  async function renderSeverComponent(currentProps: CategoryDetailsHeaderProps = props) {
-    const component = await CategoryDetailsHeader({ ...currentProps });
-
-    return render(component);
-  }
-
   it('should render', async () => {
-    await renderSeverComponent();
+    render(<CategoryDetailsHeader {...props} />);
+
+    expect(
+      screen.getByLabelText('Category title and category level navigation'),
+    ).toBeInTheDocument();
+  });
+
+  it('should render title of current category', async () => {
+    render(<CategoryDetailsHeader {...props} />);
 
     expect(screen.getByRole('heading', { level: 2, name: 'category' })).toBeInTheDocument();
   });
 
   it('should render previous and next page button with number of current page', async () => {
-    await renderSeverComponent();
+    render(<CategoryDetailsHeader {...props} />);
 
     expect(screen.getByRole('link', { name: 'Previous page' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Next page' })).toBeInTheDocument();
-    expect(screen.getByTestId('current-page-number')).toHaveTextContent('1');
     expect(screen.getByTestId('current-page-number')).toBeInTheDocument();
+    expect(screen.getByTestId('current-page-number')).toHaveTextContent('2');
   });
 
   it('should render previous page button as disabled if there is no previous page', async () => {
-    await renderSeverComponent({
+    const currentProps: CategoryDetailsHeaderProps = {
       ...props,
       previousPage: null,
-    });
+    };
+
+    render(<CategoryDetailsHeader {...currentProps} />);
 
     expect(screen.getByRole('link', { name: 'Previous page' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Previous page' })).toHaveAttribute('inert');
   });
 
   it('should render next page button as disabled if there is no next page', async () => {
-    await renderSeverComponent({
+    const currentProps: CategoryDetailsHeaderProps = {
       ...props,
       nextPage: null,
-    });
+    };
+
+    render(<CategoryDetailsHeader {...currentProps} />);
 
     expect(screen.getByRole('link', { name: 'Next page' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Next page' })).toHaveAttribute('inert');
