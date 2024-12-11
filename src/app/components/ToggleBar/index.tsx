@@ -4,6 +4,7 @@ import { QUERY_PARAM_KEYS } from '@/app/categories/[...slug]/constants';
 import { FoldVertical, UnfoldVertical } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import type { ReactElement } from 'react';
+import { useTransition } from 'react';
 
 type ToggleBarProps = {
   onRevalidateCurrentCategoryPage: () => Promise<void>;
@@ -12,22 +13,25 @@ type ToggleBarProps = {
 function ToggleBar({ onRevalidateCurrentCategoryPage }: ToggleBarProps): ReactElement {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
   const hasExpandedParam = searchParams.get(QUERY_PARAM_KEYS.EXPANDED) !== null;
 
   const handleClick = async () => {
-    const newSearchParams = new URLSearchParams(searchParams.toString());
+    startTransition(async () => {
+      const newSearchParams = new URLSearchParams(searchParams.toString());
 
-    if (hasExpandedParam) {
-      newSearchParams.delete(QUERY_PARAM_KEYS.EXPANDED);
-    } else {
-      newSearchParams.append(QUERY_PARAM_KEYS.EXPANDED, '');
-    }
+      if (hasExpandedParam) {
+        newSearchParams.delete(QUERY_PARAM_KEYS.EXPANDED);
+      } else {
+        newSearchParams.append(QUERY_PARAM_KEYS.EXPANDED, '');
+      }
 
-    window.history.replaceState(null, '', `?${newSearchParams.toString()}`);
+      window.history.replaceState(null, '', `?${newSearchParams.toString()}`);
 
-    await onRevalidateCurrentCategoryPage();
-    router.refresh();
+      await onRevalidateCurrentCategoryPage();
+      router.refresh();
+    });
   };
 
   return (
@@ -46,6 +50,7 @@ function ToggleBar({ onRevalidateCurrentCategoryPage }: ToggleBarProps): ReactEl
       <label htmlFor="toggle-bar-button" className="cursor-pointer">
         {hasExpandedParam ? 'Collapse all entries' : 'Expand all entries'}
       </label>
+      <p className="motion-safe:animate-pulse ml-auto">{isPending ? 'Please wait!' : ''}</p>
     </div>
   );
 }

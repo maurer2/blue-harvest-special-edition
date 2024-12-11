@@ -78,42 +78,44 @@ export default async function Category({ params, searchParams }: CategoryProps) 
           />
         </div>
 
-        {entries.length ? (
-          <Suspense
-            fallback={
-              <LoaderCircle
-                aria-label="Loading a new page"
-                className="animate-spin text-gray-300"
-                size={64}
-              />
-            }
-          >
-            <ToggleBar onRevalidateCurrentCategoryPage={revalidateCurrentCategoryPage} />
-            <ol
-              className="mt-6 grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 has-[*>details[open]]:items-stretch"
-              role="grid"
-              aria-label="List of results"
-            >
-              {entries.map((entry, index) => (
-                <li
-                  className="contents"
-                  key={(entry.name as string) || (entry.title as string)}
-                  role="gridcell"
-                >
-                  <DetailsToggle
-                    toggleText={(entry.name as string) || (entry.title as string)}
-                    hasForceExpand={hasExpandedParam}
-                    key={hasExpandedParam.toString()}
+        <Suspense
+          fallback={
+            <LoaderCircle
+              aria-label="Loading a new page"
+              className="animate-spin text-gray-300"
+              size={64}
+            />
+          }
+        >
+          {entries.length ? (
+            <>
+              <ToggleBar onRevalidateCurrentCategoryPage={revalidateCurrentCategoryPage} />
+              <ol
+                className="mt-6 grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 has-[*>details[open]]:items-stretch"
+                role="grid"
+                aria-label="List of results"
+              >
+                {entries.map((entry, index) => (
+                  <li
+                    className="contents"
+                    key={(entry.name as string) || (entry.title as string)}
+                    role="gridcell"
                   >
-                    <ComponentForCategory details={entry} index={index} />
-                  </DetailsToggle>
-                </li>
-              ))}
-            </ol>
-          </Suspense>
-        ) : (
-          <p>No entries found for this category.</p>
-        )}
+                    <DetailsToggle
+                      toggleText={(entry.name as string) || (entry.title as string)}
+                      hasForceExpand={hasExpandedParam}
+                      key={hasExpandedParam.toString()}
+                    >
+                      <ComponentForCategory details={entry} index={index} />
+                    </DetailsToggle>
+                  </li>
+                ))}
+              </ol>
+            </>
+          ) : (
+            <p>No entries found for this category.</p>
+          )}
+        </Suspense>
       </main>
     </>
   );
