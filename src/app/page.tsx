@@ -12,7 +12,7 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen pb-32">
-      <nav className="mb-6 bg-teal-300 p-6">
+      <nav className="mb-6 bg-teal-300">
         <Navigation categories={null} />
       </nav>
       <main className="m-6">
