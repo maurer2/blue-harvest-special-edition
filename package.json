@@ -21,7 +21,8 @@
   },
   "devDependencies": {
     "@rollup/rollup-darwin-arm64": "^4.28.0",
-    "@rollup/rollup-linux-arm64-gnu": "^4.28.0",
+    "@rollup/rollup-darwin-x64": "^4.28.0",
+    "@rollup/rollup-linux-x64-gnu": "^4.28.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
@@ -54,5 +55,17 @@
   "overrides": {
     "@types/react": "npm:types-react@rc",
     "@types/react-dom": "npm:types-react-dom@rc"
+  },
+  "pnpm": {
+    "supportedArchitectures": {
+      "cpu": [
+        "x64",
+        "arm64"
+      ],
+      "os": [
+        "linux",
+        "darwin"
+      ]
+    }
   }
 }
