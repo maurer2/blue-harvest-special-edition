@@ -4,11 +4,11 @@ import type { ReactElement } from 'react';
 import NavigationEntry from '../NavigationEntry';
 
 type MastheadProps = {
-  categories: Record<string, string> | null;
+  categories?: Record<string, string>;
 };
 
 async function Masthead({ categories }: MastheadProps): Promise<ReactElement> {
-  const entries = categories !== null ? Object.entries(categories) : [];
+  const entries = typeof categories !== 'undefined' ? Object.entries(categories) : [];
 
   return (
     <header

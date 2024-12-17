@@ -3,7 +3,7 @@ import Link from 'next/link';
 import type { ReactElement } from 'react';
 
 type CategoryTilesProps = {
-  categories: Record<string, string> | null;
+  categories?: Record<string, string>;
 };
 
 const iconConfig: LucideProps = {
@@ -21,7 +21,7 @@ const iconMap = {
 };
 
 async function CategoryTiles({ categories }: CategoryTilesProps): Promise<ReactElement> {
-  const entries = categories !== null ? Object.entries(categories) : [];
+  const entries = typeof categories !== 'undefined' ? Object.entries(categories) : [];
 
   if (!entries.length) {
     return <p>No categories found.</p>;
