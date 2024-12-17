@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 
-import planetsSchema from '../../schemas/planets';
+import planetsSchema from '../../schemas/categories/planets';
 
 type PlanetDetailsProps = {
   details: unknown;

@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 
-import filmsSchema from '../../schemas/films';
+import filmsSchema from '../../schemas/categories/films';
 
 type FilmsDetailsProps = {
   details: unknown;

@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 
-import speciesSchema from '../../schemas/species';
+import speciesSchema from '../../schemas/categories/species';
 
 type SpeciesDetailsProps = {
   details: unknown;

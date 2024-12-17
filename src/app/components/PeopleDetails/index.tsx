@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 
-import peopleSchema from '../../schemas/people';
+import peopleSchema from '../../schemas/categories/people';
 
 type PeopleDetailsProps = {
   details: unknown;

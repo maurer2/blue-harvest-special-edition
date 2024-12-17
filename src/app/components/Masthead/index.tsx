@@ -8,7 +8,7 @@ type MastheadProps = {
 };
 
 async function Masthead({ categories }: MastheadProps): Promise<ReactElement> {
-  const entries = typeof categories !== 'undefined' ? Object.entries(categories) : [];
+  const navigationEntries = typeof categories !== 'undefined' ? Object.entries(categories) : [];
 
   return (
     <header
@@ -23,9 +23,9 @@ async function Masthead({ categories }: MastheadProps): Promise<ReactElement> {
         Blue Harvest (SE)
       </Link>
 
-      {entries.length ? (
+      {navigationEntries.length ? (
         <nav className="flex flex-wrap gap-6 sm:flex-nowrap">
-          {entries.map(([name]) => (
+          {navigationEntries.map(([name]) => (
             <NavigationEntry name={name} key={name} />
           ))}
         </nav>
