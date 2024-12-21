@@ -5,7 +5,6 @@ import { Suspense } from 'react';
 
 import CategoryDetailsHeader from '../../components/CategoryDetailsHeader';
 import CategoryDetailsList from '../../components/CategoryDetailsList';
-import DetailsToggle from '../../components/DetailsToggle';
 import Masthead from '../../components/Masthead';
 import ToggleBar from '../../components/ToggleBar';
 import fetcher from '../../helpers/fetcher';

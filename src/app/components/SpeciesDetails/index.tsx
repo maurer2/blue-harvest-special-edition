@@ -15,7 +15,7 @@ async function SpeciesDetails({ details, index }: SpeciesDetailsProps): Promise<
     return <p>Details couldn't be loaded.</p>;
   }
 
-  const { name, classification, average_height, skin_colors, hair_colors } = speciesDetails.data;
+  const { name } = speciesDetails.data;
 
   return (
     <dl
@@ -25,18 +25,6 @@ async function SpeciesDetails({ details, index }: SpeciesDetailsProps): Promise<
     >
       <dt id={`${prefix}-name`}>Name:</dt>
       <dd aria-labelledby={`${prefix}-name`}>{name}</dd>
-
-      <dt id={`${prefix}-classification`}>Classification:</dt>
-      <dd aria-labelledby={`${prefix}-classification`}>{classification}</dd>
-
-      <dt id={`${prefix}-average-height`}>Average Height:</dt>
-      <dd aria-labelledby={`${prefix}-average-height`}>{average_height} cm</dd>
-
-      <dt id={`${prefix}-skin-colours`}>Skin colours:</dt>
-      <dd aria-labelledby={`${prefix}-skin-colours`}>{skin_colors}</dd>
-
-      <dt id={`${prefix}-hair-colours`}>Hair colours:</dt>
-      <dd aria-labelledby={`${prefix}-hair-colours`}>{hair_colors}</dd>
     </dl>
   );
 }

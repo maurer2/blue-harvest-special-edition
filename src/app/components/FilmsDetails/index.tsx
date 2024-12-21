@@ -8,14 +8,14 @@ type FilmsDetailsProps = {
 };
 
 async function FilmsDetails({ details, index }: FilmsDetailsProps): Promise<ReactElement> {
-  const planetDetails = filmsSchema.safeParse(details);
+  const filmsDetails = filmsSchema.safeParse(details);
   const prefix = `film-details-${index}`;
 
-  if (!planetDetails.success) {
+  if (!filmsDetails.success) {
     return <p>Details couldn't be loaded.</p>;
   }
 
-  const { title, episode_id, director, release_date, producer } = planetDetails.data;
+  const { title, episode_id, director, release_date, producer } = filmsDetails.data.properties;
 
   return (
     <dl

@@ -8,14 +8,14 @@ type PlanetDetailsProps = {
 };
 
 async function PlanetsDetails({ details, index }: PlanetDetailsProps): Promise<ReactElement> {
-  const planetDetails = planetsSchema.safeParse(details);
-  const prefix = `planet-details-${index}`;
+  const planetsDetails = planetsSchema.safeParse(details);
+  const prefix = `planets-details-${index}`;
 
-  if (!planetDetails.success) {
+  if (!planetsDetails.success) {
     return <p>Details couldn't be loaded.</p>;
   }
 
-  const { name, diameter, climate, terrain, population } = planetDetails.data;
+  const { name } = planetsDetails.data;
 
   return (
     <dl
@@ -25,18 +25,6 @@ async function PlanetsDetails({ details, index }: PlanetDetailsProps): Promise<R
     >
       <dt id={`${prefix}-name`}>Name:</dt>
       <dd aria-labelledby={`${prefix}-name`}>{name}</dd>
-
-      <dt id={`${prefix}-diameter`}>Diameter:</dt>
-      <dd aria-labelledby={`${prefix}-diameter`}>{diameter} KM</dd>
-
-      <dt id={`${prefix}-climate`}>Climate:</dt>
-      <dd aria-labelledby={`${prefix}-climate`}>{climate}</dd>
-
-      <dt id={`${prefix}-terrain`}>Terrain:</dt>
-      <dd aria-labelledby={`${prefix}-terrain`}>{terrain}</dd>
-
-      <dt id={`${prefix}-population`}>Population:</dt>
-      <dd aria-labelledby={`${prefix}-population`}>{population}</dd>
     </dl>
   );
 }

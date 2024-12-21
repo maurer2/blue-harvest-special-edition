@@ -15,7 +15,7 @@ async function PeopleDetails({ details, index }: PeopleDetailsProps): Promise<Re
     return <p>Details couldn't be loaded.</p>;
   }
 
-  const { name, height, gender, mass, skin_color, hair_color } = peopleDetails.data;
+  const { name } = peopleDetails.data;
 
   return (
     <dl
@@ -25,21 +25,6 @@ async function PeopleDetails({ details, index }: PeopleDetailsProps): Promise<Re
     >
       <dt id={`${prefix}-name`}>Name:</dt>
       <dd aria-labelledby={`${prefix}-name`}>{name}</dd>
-
-      <dt id={`${prefix}-height`}>Height:</dt>
-      <dd aria-labelledby={`${prefix}-height`}>{height} cm</dd>
-
-      <dt id={`${prefix}-mass`}>Mass:</dt>
-      <dd aria-labelledby={`${prefix}-mass`}>{mass} kg</dd>
-
-      <dt id={`${prefix}-gender`}>Gender:</dt>
-      <dd aria-labelledby={`${prefix}-gender`}>{gender}</dd>
-
-      <dt id={`${prefix}-skin-colour`}>Skin colour:</dt>
-      <dd aria-labelledby={`${prefix}-skin-colour`}>{skin_color}</dd>
-
-      <dt id={`${prefix}-hair-colour`}>Hair colour:</dt>
-      <dd aria-labelledby={`${prefix}-hair-colour`}>{hair_color}</dd>
     </dl>
   );
 }
