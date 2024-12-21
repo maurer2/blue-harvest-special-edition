@@ -8,8 +8,8 @@ import DetailsToggle from '../../components/DetailsToggle';
 import Masthead from '../../components/Masthead';
 import ToggleBar from '../../components/ToggleBar';
 import fetcher from '../../helpers/fetcher';
-import payloadSchema, { type Payload } from '../../schemas/payload';
 import rootCategoriesSchema from '../../schemas/root-categories';
+import getCategoryEntries from '../../services/get-category-entries/get-category-entries';
 import { QUERY_PARAM_KEYS } from './constants';
 
 type CategoryProps = {
@@ -43,27 +43,19 @@ export default async function Category({ params, searchParams }: CategoryProps) 
     revalidatePath('/categories/[...slug]', 'page');
   };
 
-  const [categoriesPayload, categoryPayload] = await Promise.allSettled([
+  const [categoriesPayload, categoryEntries] = await Promise.allSettled([
     fetcher('https://swapi.tech/api', rootCategoriesSchema),
-    fetcher(`https://swapi.tech/api/${category}?page=${pageNumber}&limit=10`, payloadSchema),
+    getCategoryEntries(category, pageNumber),
   ]);
 
   const hasEntriesForMasthead = categoriesPayload.status === 'fulfilled';
-  const hasEntriesForCategory = categoryPayload.status === 'fulfilled';
+  const hasEntriesForCategory = categoryEntries.status === 'fulfilled';
 
-  let payloadMultiple: Payload | null = null;
-  let entries = [];
-
-  if (hasEntriesForCategory && 'result' in categoryPayload.value) {
-    entries = categoryPayload.value.result;
-  }
-  if (hasEntriesForCategory && 'results' in categoryPayload.value) {
-    payloadMultiple = categoryPayload.value;
-    entries = categoryPayload.value.results;
-  }
-
-  const nextPage = payloadMultiple !== null ? payloadMultiple.next : null;
-  const previousPage = payloadMultiple !== null ? payloadMultiple.previous : null;
+  const entries = hasEntriesForCategory ? categoryEntries.value.entries : [];
+  const nextPage = hasEntriesForCategory ? (categoryEntries.value.pagination?.next ?? null) : null;
+  const previousPage = hasEntriesForCategory
+    ? (categoryEntries.value.pagination?.previous ?? null)
+    : null;
   const hasExpandedParam = (expandedParam ?? null) !== null;
 
   return (
@@ -99,21 +91,25 @@ export default async function Category({ params, searchParams }: CategoryProps) 
                 role="grid"
                 aria-label="List of results"
               >
-                {entries.map((entry, index) => (
-                  <li
-                    className="contents"
-                    key={(entry.name as string) || (entry.title as string)}
-                    role="gridcell"
-                  >
-                    <DetailsToggle
-                      toggleText={(entry.name as string) || (entry?.properties?.title as string)}
-                      hasForceExpand={hasExpandedParam}
-                      key={hasExpandedParam.toString()}
-                    >
-                      <ComponentForCategory details={entry} index={index} />
-                    </DetailsToggle>
-                  </li>
-                ))}
+                {entries.map((entry, index) => {
+                  const entryObject = entry as Record<string, unknown>;
+                  const title =
+                    (entryObject?.name as string) ||
+                    (entryObject?.title as string) ||
+                    (entryObject?.properties?.title as string);
+
+                  return (
+                    <li className="contents" key={title} role="gridcell">
+                      <DetailsToggle
+                        toggleText={title}
+                        hasForceExpand={hasExpandedParam}
+                        key={hasExpandedParam.toString()}
+                      >
+                        <ComponentForCategory details={entry} index={index} />
+                      </DetailsToggle>
+                    </li>
+                  );
+                })}
               </ol>
             </>
           ) : (
