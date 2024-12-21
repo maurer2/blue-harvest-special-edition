@@ -9,7 +9,6 @@ import Masthead from '../../components/Masthead';
 import ToggleBar from '../../components/ToggleBar';
 import fetcher from '../../helpers/fetcher';
 import payloadSchema, { type Payload } from '../../schemas/payload';
-import type { RootCategories } from '../../schemas/root-categories';
 import rootCategoriesSchema from '../../schemas/root-categories';
 import { QUERY_PARAM_KEYS } from './constants';
 
@@ -38,31 +37,39 @@ export default async function Category({ params, searchParams }: CategoryProps) 
     return notFound();
   }
 
-  const categoriesPayload = await fetcher('https://swapi.tech/api', rootCategoriesSchema);
-  const categoryPayload = await fetcher(
-    `https://swapi.tech/api/${category}?page=${pageNumber}&limit=10`,
-    payloadSchema,
-  );
-
   const revalidateCurrentCategoryPage = async () => {
     'use server';
 
     revalidatePath('/categories/[...slug]', 'page');
   };
 
-  const hasEntriesForCategory = 'results' in categoryPayload;
+  const [categoriesPayload, categoryPayload] = await Promise.allSettled([
+    fetcher('https://swapi.tech/api', rootCategoriesSchema),
+    fetcher(`https://swapi.tech/api/${category}?page=${pageNumber}&limit=10`, payloadSchema),
+  ]);
 
-  const entries = hasEntriesForCategory ? categoryPayload.results : [];
-  const nextPage = hasEntriesForCategory ? categoryPayload.next : null;
-  const previousPage = hasEntriesForCategory ? categoryPayload.previous : null;
+  const hasEntriesForMasthead = categoriesPayload.status === 'fulfilled';
+  const hasEntriesForCategory = categoryPayload.status === 'fulfilled';
+
+  let payloadMultiple: Payload | null = null;
+  let entries = [];
+
+  if (hasEntriesForCategory && 'result' in categoryPayload.value) {
+    entries = categoryPayload.value.result;
+  }
+  if (hasEntriesForCategory && 'results' in categoryPayload.value) {
+    payloadMultiple = categoryPayload.value;
+    entries = categoryPayload.value.results;
+  }
+
+  const nextPage = payloadMultiple !== null ? payloadMultiple.next : null;
+  const previousPage = payloadMultiple !== null ? payloadMultiple.previous : null;
   const hasExpandedParam = (expandedParam ?? null) !== null;
-
-  console.log(categoryPayload);
 
   return (
     <>
       <div className="mb-6">
-        <Masthead categories={categoriesPayload?.result} />
+        <Masthead categories={hasEntriesForMasthead ? categoriesPayload.value.result : undefined} />
       </div>
 
       <main className="m-6 max-w-[calc(1920px-theme(spacing.6)-theme(spacing.6))]">
@@ -99,7 +106,7 @@ export default async function Category({ params, searchParams }: CategoryProps) 
                     role="gridcell"
                   >
                     <DetailsToggle
-                      toggleText={(entry.name as string) || (entry.title as string)}
+                      toggleText={(entry.name as string) || (entry?.properties?.title as string)}
                       hasForceExpand={hasExpandedParam}
                       key={hasExpandedParam.toString()}
                     >
