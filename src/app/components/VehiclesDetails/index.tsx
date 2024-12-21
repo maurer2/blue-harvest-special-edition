@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 
-import vehiclesSchema from '../../schemas/vehicles';
+import vehiclesSchema from '../../schemas/categories/vehicles';
 
 type VehiclesDetailsProps = {
   details: unknown;

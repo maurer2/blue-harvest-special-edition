@@ -38,18 +38,11 @@ export default async function Category({ params, searchParams }: CategoryProps) 
     return notFound();
   }
 
-  const categories: RootCategories | null = await fetcher(
-    'https://swapi.dev/api',
-    rootCategoriesSchema,
-  );
-  const response: Payload | null = await fetcher(
-    `https://swapi.dev/api/${category}?page=${pageNumber}`,
+  const categoriesPayload = await fetcher('https://swapi.tech/api', rootCategoriesSchema);
+  const categoryPayload = await fetcher(
+    `https://swapi.tech/api/${category}?page=${pageNumber}&limit=10`,
     payloadSchema,
   );
-
-  if (!response) {
-    return notFound();
-  }
 
   const revalidateCurrentCategoryPage = async () => {
     'use server';
@@ -57,15 +50,19 @@ export default async function Category({ params, searchParams }: CategoryProps) 
     revalidatePath('/categories/[...slug]', 'page');
   };
 
-  const entries: Payload['results'] = response?.results ?? [];
-  const nextPage = response?.next ?? null;
-  const previousPage = response?.previous ?? null;
+  const hasEntriesForCategory = 'results' in categoryPayload;
+
+  const entries = hasEntriesForCategory ? categoryPayload.results : [];
+  const nextPage = hasEntriesForCategory ? categoryPayload.next : null;
+  const previousPage = hasEntriesForCategory ? categoryPayload.previous : null;
   const hasExpandedParam = (expandedParam ?? null) !== null;
+
+  console.log(categoryPayload);
 
   return (
     <>
       <div className="mb-6">
-        <Masthead categories={categories} />
+        <Masthead categories={categoriesPayload?.result} />
       </div>
 
       <main className="m-6 max-w-[calc(1920px-theme(spacing.6)-theme(spacing.6))]">

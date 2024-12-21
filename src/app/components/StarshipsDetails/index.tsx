@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 
-import starshipsSchema from '../../schemas/starships';
+import starshipsSchema from '../../schemas/categories/starships';
 
 type StarshipDetailsProps = {
   details: unknown;
