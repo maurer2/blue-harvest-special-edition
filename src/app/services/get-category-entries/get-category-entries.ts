@@ -5,11 +5,11 @@ import fetcher from '../../helpers/fetcher';
 
 const responseMessage = z.union([z.literal('ok'), z.literal('error'), z.literal('fail')]);
 
-const payloadWithoutPaginationSchema = z.object({
+const categoryWithoutPaginationPayloadSchema = z.object({
   message: responseMessage,
   result: z.array(z.unknown()),
 });
-const payloadWithPaginationSchema = z.object({
+const categoryWithPaginationPayloadSchema = z.object({
   message: responseMessage,
   total_records: z.number(),
   total_pages: z.number(),
@@ -18,8 +18,8 @@ const payloadWithPaginationSchema = z.object({
   results: z.array(z.unknown()),
 });
 
-const payloadSchema = z
-  .union([payloadWithoutPaginationSchema, payloadWithPaginationSchema])
+const categoryPayloadSchema = z
+  .union([categoryWithoutPaginationPayloadSchema, categoryWithPaginationPayloadSchema])
   .transform((schema) => {
     if ('result' in schema) {
       return {
@@ -38,16 +38,18 @@ const payloadSchema = z
     };
   });
 
-type PayloadIn = z.input<typeof payloadSchema>;
-type Payload = z.output<typeof payloadSchema>;
+type CategoryPayloadIn = z.input<typeof categoryPayloadSchema>;
+type CategoryPayload = z.output<typeof categoryPayloadSchema>;
 
-const getCategoryEntries = (category: string, pageNumber: string): Promise<Payload> => {
+const getCategoryEntries = (category: string, pageNumber: string): Promise<CategoryPayload> => {
   // 'use cache';
   // cacheTag('category-entries', category, pageNumber);
 
-  return fetcher(`https://swapi.tech/api/${category}?page=${pageNumber}&limit=10`, payloadSchema);
+  return fetcher(
+    `https://swapi.tech/api/${category}?page=${pageNumber}&limit=10`,
+    categoryPayloadSchema,
+  );
 };
 
 export default getCategoryEntries;
-export { payloadSchema };
-export type { PayloadIn, Payload };
+export { categoryPayloadSchema, type CategoryPayloadIn, type CategoryPayload };

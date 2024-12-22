@@ -1,14 +1,16 @@
 import Link from 'next/link';
 import type { ReactElement } from 'react';
 
+import type { RootCategoryEntriesPayload } from '../../services/get-root-entries/get-root-entries';
 import NavigationEntry from '../NavigationEntry';
 
 type MastheadProps = {
-  categories?: Record<string, string>;
+  categoriesPromise?: Promise<RootCategoryEntriesPayload>;
 };
 
-async function Masthead({ categories }: MastheadProps): Promise<ReactElement> {
-  const navigationEntries = typeof categories !== 'undefined' ? Object.entries(categories) : [];
+async function Masthead({ categoriesPromise }: MastheadProps): Promise<ReactElement> {
+  const categories = await categoriesPromise?.catch(() => undefined);
+  const entries = typeof categories !== 'undefined' ? Object.entries(categories.result) : [];
 
   return (
     <header
@@ -23,9 +25,9 @@ async function Masthead({ categories }: MastheadProps): Promise<ReactElement> {
         Blue Harvest (SE)
       </Link>
 
-      {navigationEntries.length ? (
+      {entries.length ? (
         <nav className="flex flex-wrap gap-6 sm:flex-nowrap">
-          {navigationEntries.map(([name]) => (
+          {entries.map(([name]) => (
             <NavigationEntry name={name} key={name} />
           ))}
         </nav>

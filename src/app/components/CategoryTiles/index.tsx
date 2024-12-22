@@ -4,8 +4,10 @@ import Link from 'next/link';
 import { type ReactElement, Suspense, lazy } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
+import type { RootCategoryEntriesPayload } from '../../services/get-root-entries/get-root-entries';
+
 type CategoryTilesProps = {
-  categories?: Record<string, string>;
+  categoriesPromise: Promise<RootCategoryEntriesPayload>;
 };
 
 const iconMap: Record<string, keyof typeof dynamicIconImports> = {
@@ -22,8 +24,9 @@ const iconConfig: LucideProps = {
   'aria-hidden': true,
 };
 
-async function CategoryTiles({ categories }: CategoryTilesProps): Promise<ReactElement> {
-  const entries = typeof categories !== 'undefined' ? Object.entries(categories) : [];
+async function CategoryTiles({ categoriesPromise }: CategoryTilesProps): Promise<ReactElement> {
+  const categories = await categoriesPromise;
+  const entries = typeof categories !== 'undefined' ? Object.entries(categories.result) : [];
 
   if (!entries.length) {
     return <p>No categories found.</p>;

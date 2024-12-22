@@ -15,11 +15,9 @@ async function CategoryDetailsList({
 }: CategoryDetailsHeaderProps): Promise<ReactElement> {
   const ComponentForCategory = lazy(() => import(`../../components/${componentName}`));
 
-  console.log(entries);
-
   return (
     <ol
-      className="mt-6 grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 has-[*>details[open]]:items-stretch"
+      className="grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 has-[*>details[open]]:items-stretch"
       role="grid"
       aria-label="List of results"
     >
