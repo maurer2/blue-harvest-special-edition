@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { ReactElement } from 'react';
 
 import starshipsSchema from '../../schemas/categories/starships';
@@ -15,17 +16,20 @@ async function StarshipsDetails({ details, index }: StarshipDetailsProps): Promi
     return <p>Details couldn't be loaded.</p>;
   }
 
-  const { name } = starshipsDetails.data;
+  const { name, uid } = starshipsDetails.data;
 
   return (
-    <dl
-      role="list"
-      className="grid grid-cols-[max-content_1fr] gap-x-2 gap-y-1"
-      aria-label="Starship details"
-    >
-      <dt id={`${prefix}-name`}>Name:</dt>
-      <dd aria-labelledby={`${prefix}-name`}>{name}</dd>
-    </dl>
+    <>
+      <dl
+        role="list"
+        className="grid grid-cols-[max-content_1fr] gap-x-2 gap-y-1"
+        aria-label="Starship details"
+      >
+        <dt id={`${prefix}-name`}>Name:</dt>
+        <dd aria-labelledby={`${prefix}-name`}>{name}</dd>
+      </dl>
+      <Link href={`/details/starships/${uid}`}>View details</Link>
+    </>
   );
 }
 

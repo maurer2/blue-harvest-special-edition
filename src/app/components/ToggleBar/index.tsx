@@ -1,6 +1,6 @@
 'use client';
 
-import { QUERY_PARAM_KEYS } from '@/app/categories/[...slug]/constants';
+import { QUERY_PARAM_KEYS } from '@/app/(subpages)/categories/[...slug]/constants';
 import { FoldVertical, UnfoldVertical } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import type { ReactElement } from 'react';

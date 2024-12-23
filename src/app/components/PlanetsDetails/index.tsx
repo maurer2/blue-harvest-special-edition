@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { ReactElement } from 'react';
 
 import planetsSchema from '../../schemas/categories/planets';
@@ -15,17 +16,20 @@ async function PlanetsDetails({ details, index }: PlanetDetailsProps): Promise<R
     return <p>Details couldn't be loaded.</p>;
   }
 
-  const { name } = planetsDetails.data;
+  const { name, uid } = planetsDetails.data;
 
   return (
-    <dl
-      role="list"
-      className="grid grid-cols-[max-content_1fr] gap-x-2 gap-y-1"
-      aria-label="Planet details"
-    >
-      <dt id={`${prefix}-name`}>Name:</dt>
-      <dd aria-labelledby={`${prefix}-name`}>{name}</dd>
-    </dl>
+    <>
+      <dl
+        role="list"
+        className="grid grid-cols-[max-content_1fr] gap-x-2 gap-y-1 mb-4"
+        aria-label="Planet details"
+      >
+        <dt id={`${prefix}-name`}>Name:</dt>
+        <dd aria-labelledby={`${prefix}-name`}>{name}</dd>
+      </dl>
+      <Link href={`/details/planets/${uid}`}>View details</Link>
+    </>
   );
 }
 

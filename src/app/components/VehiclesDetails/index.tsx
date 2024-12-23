@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { ReactElement } from 'react';
 
 import vehiclesSchema from '../../schemas/categories/vehicles';
@@ -15,17 +16,20 @@ async function VehiclesDetails({ details, index }: VehiclesDetailsProps): Promis
     return <p>Details couldn't be loaded.</p>;
   }
 
-  const { name } = vehiclesDetails.data;
+  const { name, uid } = vehiclesDetails.data;
 
   return (
-    <dl
-      role="list"
-      className="grid grid-cols-[max-content_1fr] gap-x-2 gap-y-1"
-      aria-label="Vehicle details"
-    >
-      <dt id={`${prefix}-name`}>Name:</dt>
-      <dd aria-labelledby={`${prefix}-name`}>{name}</dd>
-    </dl>
+    <>
+      <dl
+        role="list"
+        className="grid grid-cols-[max-content_1fr] gap-x-2 gap-y-1"
+        aria-label="Vehicle details"
+      >
+        <dt id={`${prefix}-name`}>Name:</dt>
+        <dd aria-labelledby={`${prefix}-name`}>{name}</dd>
+      </dl>
+      <Link href={`/details/vehicles/${uid}`}>View details</Link>
+    </>
   );
 }
 

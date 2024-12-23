@@ -3,10 +3,10 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import CategoryDetails from '../../components/CategoryDetails';
-import Masthead from '../../components/Masthead';
-import getCategoryEntries from '../../services/get-category-entries/get-category-entries';
-import getRootCategoryEntries from '../../services/get-root-entries/get-root-entries';
+import CategoryDetails from '../../../components/CategoryDetails';
+import Masthead from '../../../components/Masthead';
+import getCategoryEntries from '../../../services/get-category-entries/get-category-entries';
+import getRootCategoryEntries from '../../../services/get-root-entries/get-root-entries';
 import { CATEGORIES_MAP, QUERY_PARAM_KEYS } from './constants';
 
 type CategoryProps = {
@@ -15,8 +15,7 @@ type CategoryProps = {
 };
 
 export default async function Category({ params, searchParams }: CategoryProps) {
-  const category = (await params).slug[0];
-  const pageNumber = (await params).slug[1];
+  const [category, pageNumber] = (await params).slug;
   const expandedParam = (await searchParams)?.[QUERY_PARAM_KEYS.EXPANDED];
 
   const componentName =
