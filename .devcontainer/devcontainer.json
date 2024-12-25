@@ -95,7 +95,10 @@
         "mikestead.dotenv",
         "vunguyentuan/vscode-css-variables",
         "qcz/vscode-restart-ts-server-button",
-        "vincaslt.highlight-matching-tag"
+        "github.copilot"
+        // "Orta.vscode-jest",
+        // "ms-playwright.playwright"
+        // "attilabuti.vscode-mjml",
       ]
     }
   }
