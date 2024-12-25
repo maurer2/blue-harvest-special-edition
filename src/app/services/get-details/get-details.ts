@@ -4,7 +4,7 @@ import fetcher from '../../helpers/fetcher';
 export const CATEGORIES_SCHEMA_MAP = {
   people: () => import('../../schemas/details/people'),
   planets: () => import('../../schemas/details/planets'),
-  films: () => import('../../schemas/categories/films'),
+  films: () => import('../../schemas/details/films'),
   species: () => import('../../schemas/details/species'),
   starships: () => import('../../schemas/details/starships'),
   vehicles: () => import('../../schemas/details/vehicles'),

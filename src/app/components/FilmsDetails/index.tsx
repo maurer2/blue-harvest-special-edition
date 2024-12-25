@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { ReactElement } from 'react';
 
 import filmsSchema from '../../schemas/categories/films';
@@ -11,32 +12,24 @@ async function FilmsDetails({ details, index }: FilmsDetailsProps): Promise<Reac
   const filmsDetails = filmsSchema.safeParse(details);
   const prefix = `film-details-${index}`;
 
+  console.log(details);
+
   if (!filmsDetails.success) {
     return <p>Details couldn't be loaded.</p>;
   }
 
-  const { title, episode_id, director, release_date, producer } = filmsDetails.data.properties;
+  const { name, uid } = filmsDetails.data;
 
   return (
     <dl
       role="list"
-      className="grid grid-cols-[max-content_1fr] gap-x-2 gap-y-1"
+      className="grid grid-cols-[max-content_1fr] gap-x-2 gap-y-1 mb-4"
       aria-label="Film details"
     >
-      <dt id={`${prefix}-title`}>Title:</dt>
-      <dd aria-labelledby={`${prefix}-title`}>{title}</dd>
+      <dt id={`${prefix}-name`}>Name:</dt>
+      <dd aria-labelledby={`${prefix}-name`}>{name}</dd>
 
-      <dt id={`${prefix}-episode-id`}>Episode:</dt>
-      <dd aria-labelledby={`${prefix}-episode-id`}>{episode_id} km</dd>
-
-      <dt id={`${prefix}-director`}>Director:</dt>
-      <dd aria-labelledby={`${prefix}-director`}>{director}</dd>
-
-      <dt id={`${prefix}-release-date`}>Release date:</dt>
-      <dd aria-labelledby={`${prefix}-release-date`}>{release_date}</dd>
-
-      <dt id={`${prefix}-producer`}>Population:</dt>
-      <dd aria-labelledby={`${prefix}-producer`}>{producer}</dd>
+      <Link href={`/details/films/${uid}`}>View details</Link>
     </dl>
   );
 }

@@ -13,6 +13,7 @@ const peopleSchema = detailsWrapperSchema.extend({
       created: z.string(), // "2024-12-25T19:22:05.408Z"
       edited: z.string(), // "2024-12-25T19:22:05.408Z"
       name: z.string(),
+
       birth_year: z.string(),
       eye_color: z.string(),
       gender: z.string(),

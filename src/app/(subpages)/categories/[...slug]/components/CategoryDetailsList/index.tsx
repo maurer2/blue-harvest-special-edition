@@ -23,7 +23,7 @@ async function CategoryDetailsList({
     >
       {entries.map((entry, index) => {
         const entryObject = entry as Record<string, unknown>;
-        const title = (entryObject?.name as string) || (entryObject?.properties?.title as string);
+        const title = entryObject?.name as string;
 
         return (
           <li className="contents" key={title} role="gridcell">
