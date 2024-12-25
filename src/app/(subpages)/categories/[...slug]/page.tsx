@@ -3,10 +3,10 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import CategoryDetails from '../../../components/CategoryDetails';
 import Masthead from '../../../components/Masthead';
 import getCategoryEntries from '../../../services/get-category-entries/get-category-entries';
 import getRootCategoryEntries from '../../../services/get-root-entries/get-root-entries';
+import CategoryDetails from './components/CategoryDetails';
 import { CATEGORIES_MAP, QUERY_PARAM_KEYS } from './constants';
 
 type CategoryProps = {

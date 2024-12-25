@@ -13,7 +13,7 @@ async function CategoryDetailsList({
   componentName,
   hasExpandedParameter,
 }: CategoryDetailsHeaderProps): Promise<ReactElement> {
-  const ComponentForCategory = lazy(() => import(`../../components/${componentName}`));
+  const ComponentForCategory = lazy(() => import(`../../../../../components/${componentName}`));
 
   return (
     <ol

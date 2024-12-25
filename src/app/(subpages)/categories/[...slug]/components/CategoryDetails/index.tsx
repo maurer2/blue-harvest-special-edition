@@ -3,10 +3,10 @@ import { revalidatePath } from 'next/cache';
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
+import type { CategoryPayload } from '../../../../../services/get-category-entries/get-category-entries';
 import CategoryDetailsHeader from '../../components/CategoryDetailsHeader';
 import CategoryDetailsList from '../../components/CategoryDetailsList';
-import ToggleBar from '../../components/ToggleBar';
-import type { CategoryPayload } from '../../services/get-category-entries/get-category-entries';
+import ToggleBar from '../ToggleBar';
 
 type CategoryDetailsProps = {
   categoryEntriesPromise: Promise<CategoryPayload>;
@@ -24,6 +24,8 @@ export default async function CategoryDetails({
   componentName,
 }: CategoryDetailsProps) {
   const categoryEntries = await categoryEntriesPromise;
+
+  console.log(categoryEntries);
 
   const { entries } = categoryEntries;
   const nextPage = categoryEntries.pagination?.next ?? null;
