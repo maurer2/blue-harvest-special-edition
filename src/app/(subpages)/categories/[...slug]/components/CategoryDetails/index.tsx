@@ -25,8 +25,6 @@ export default async function CategoryDetails({
 }: CategoryDetailsProps) {
   const categoryEntries = await categoryEntriesPromise;
 
-  console.log(categoryEntries);
-
   const { entries } = categoryEntries;
   const nextPage = categoryEntries.pagination?.next ?? null;
   const previousPage = categoryEntries.pagination?.previous ?? null;

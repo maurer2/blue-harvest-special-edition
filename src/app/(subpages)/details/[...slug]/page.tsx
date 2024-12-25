@@ -1,10 +1,9 @@
 import { LoaderCircle } from 'lucide-react';
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import z from 'zod';
 
 import Masthead from '../../../components/Masthead';
-import fetcher from '../../../helpers/fetcher';
+import getDetails from '../../../services/get-details/get-details';
 import getRootCategoryEntries from '../../../services/get-root-entries/get-root-entries';
 import ItemDetails from './components/ItemDetails';
 
@@ -15,7 +14,7 @@ type DetailsProps = {
 export default async function Details({ params }: DetailsProps) {
   const [category, id] = (await params).slug;
 
-  const detailsPromise = fetcher(`https://www.swapi.tech/api/${category}/${id}`, z.any());
+  const detailsPromise = getDetails(category, id);
   const categoriesPromise = getRootCategoryEntries();
 
   return (
