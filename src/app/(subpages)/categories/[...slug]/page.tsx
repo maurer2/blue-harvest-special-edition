@@ -7,16 +7,15 @@ import Masthead from '../../../components/Masthead';
 import getCategoryEntries from '../../../services/get-category-entries/get-category-entries';
 import getRootCategoryEntries from '../../../services/get-root-entries/get-root-entries';
 import CategoryDetails from './components/CategoryDetails';
-import { CATEGORIES_MAP, QUERY_PARAM_KEYS } from './constants';
+import { CATEGORIES_MAP } from './constants';
 
 type CategoryProps = {
   params: Promise<{ slug: string[] }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  // searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-export default async function Category({ params, searchParams }: CategoryProps) {
+export default async function Category({ params }: CategoryProps) {
   const [category, pageNumber] = (await params).slug;
-  const expandedParam = (await searchParams)?.[QUERY_PARAM_KEYS.EXPANDED];
 
   const componentName =
     category in CATEGORIES_MAP ? CATEGORIES_MAP[category as keyof typeof CATEGORIES_MAP] : null;
@@ -27,8 +26,6 @@ export default async function Category({ params, searchParams }: CategoryProps) 
 
   const categoriesPromise = getRootCategoryEntries();
   const categoryEntriesPromise = getCategoryEntries(category, pageNumber);
-
-  const expandedParameter = (expandedParam ?? null) !== null;
 
   return (
     <>
@@ -41,10 +38,8 @@ export default async function Category({ params, searchParams }: CategoryProps) 
           >
             <CategoryDetails
               categoryEntriesPromise={categoryEntriesPromise}
-              hasExpandedParameter={expandedParameter}
               category={category}
               pageNumber={pageNumber}
-              componentName={componentName}
             />
           </Suspense>
         </ErrorBoundary>

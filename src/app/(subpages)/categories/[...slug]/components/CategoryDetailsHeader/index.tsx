@@ -31,7 +31,7 @@ function CategoryDetailsHeader({
         <Link
           href={`/categories/${category}/${currentPageAsNumber - 1}?${searchParams}`}
           className={clsx(
-            'item-hover:border-gray flex grow-0 items-center border p-4 px-4 py-2 capitalize outline-none hover:border-teal-300 hover:bg-transparent hover:text-teal-300 focus-visible:border-teal-300 focus-visible:text-teal-300',
+            'flex grow-0 items-center border p-4 px-4 py-2 capitalize outline-none hover:border-teal-300 hover:bg-transparent hover:text-teal-300 focus-visible:border-teal-300 focus-visible:text-teal-300',
             {
               'line-through opacity-50': !hasPrevPage,
             },
@@ -50,7 +50,7 @@ function CategoryDetailsHeader({
         <Link
           href={`/categories/${category}/${currentPageAsNumber + 1}?${searchParams}`}
           className={clsx(
-            'item-hover:border-gray flex grow-0 items-center border p-4 px-4 py-2 capitalize outline-none hover:border-teal-300 hover:bg-transparent hover:text-teal-300 focus-visible:border-teal-300 focus-visible:text-teal-300',
+            'flex grow-0 items-center border p-4 px-4 py-2 capitalize outline-none hover:border-teal-300 hover:bg-transparent hover:text-teal-300 focus-visible:border-teal-300 focus-visible:text-teal-300',
             {
               'line-through opacity-50': !hasNextPage,
             },

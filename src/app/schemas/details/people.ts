@@ -2,10 +2,6 @@ import { z } from 'zod';
 
 import detailsWrapperSchema from '../details-wrapper';
 
-// const detailsWrapperSchemaWithoutPropertiesField = detailsWrapperSchema.shape.result.omit({
-//   properties: true,
-// });
-
 const peopleSchema = detailsWrapperSchema.extend({
   result: detailsWrapperSchema.shape.result.extend({
     properties: z.object({
