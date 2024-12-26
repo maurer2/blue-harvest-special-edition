@@ -25,8 +25,10 @@ export default async function Details({ params }: DetailsProps) {
       <Masthead categoriesPromise={categoriesPromise} />
 
       <main className="max-w-[calc(1920px-theme(spacing.6)-theme(spacing.6))] p-6">
-        <h2 className="mb-4">Details</h2>
-        <ErrorBoundary fallback={<p>Failed to load item details</p>}>
+        <h2 className="mb-6">
+          <span className="capitalize">{category}</span> details
+        </h2>
+        <ErrorBoundary fallback={<p>Failed to load item details.</p>}>
           <Suspense
             fallback={<LoaderCircle className="motion-safe:animate-spin h-12 w-12 text-gray-300" />}
           >
