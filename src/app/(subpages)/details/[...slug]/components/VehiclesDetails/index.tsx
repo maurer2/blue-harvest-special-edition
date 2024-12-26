@@ -26,7 +26,7 @@ export default function VehiclesDetails({
 
       <button
         onClick={router.back}
-        className="mt-8 flex items-center border p-4 px-4 py-2 outline-none hover:border-teal-300 hover:bg-transparent hover:text-teal-300 focus-visible:border-teal-300 focus-visible:text-teal-300"
+        className="mt-8 flex items-center border px-4 py-2 outline-none hover:border-teal-300 hover:bg-transparent hover:text-teal-300 focus-visible:border-teal-300 focus-visible:text-teal-300"
       >
         Go back
       </button>
