@@ -1,18 +1,25 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import type { ReactElement } from 'react';
 import { use } from 'react';
 
-type ItemDetails = {
-  itemDetailsPromise: Promise<unknown>;
+import type { Planet } from '../../../../../schemas/details/planets';
+
+type PlanetsDetailsProps = {
+  itemDetailsPromise: Promise<Planet>;
 };
 
-export default function ItemDetails({ itemDetailsPromise }: ItemDetails) {
-  const router = useRouter();
+export default function PlanetsDetails({ itemDetailsPromise }: PlanetsDetailsProps): ReactElement {
   const details = use(itemDetailsPromise);
+  const router = useRouter();
+
+  const { name } = details.result.properties;
 
   return (
-    <div>
+    <article>
+      <h2>{name}</h2>
+
       <code className="whitespace-pre-wrap block">{JSON.stringify(details, null, 4)}</code>
 
       <button
@@ -21,6 +28,6 @@ export default function ItemDetails({ itemDetailsPromise }: ItemDetails) {
       >
         Go back
       </button>
-    </div>
+    </article>
   );
 }

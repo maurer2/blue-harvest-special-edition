@@ -4,23 +4,19 @@ import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import Masthead from '../../../components/Masthead';
+import { CATEGORIES } from '../../../constants';
 import getCategoryEntries from '../../../services/get-category-entries/get-category-entries';
 import getRootCategoryEntries from '../../../services/get-root-entries/get-root-entries';
 import CategoryDetails from './components/CategoryDetails';
-import { CATEGORIES_MAP } from './constants';
 
 type CategoryProps = {
   params: Promise<{ slug: string[] }>;
-  // searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export default async function Category({ params }: CategoryProps) {
   const [category, pageNumber] = (await params).slug;
 
-  const componentName =
-    category in CATEGORIES_MAP ? CATEGORIES_MAP[category as keyof typeof CATEGORIES_MAP] : null;
-
-  if (!componentName) {
+  if (!CATEGORIES.includes(category)) {
     return notFound();
   }
 
