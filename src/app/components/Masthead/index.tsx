@@ -22,7 +22,14 @@ async function Masthead({ categoriesPromise }: MastheadProps): Promise<ReactElem
         title="Go back to the homepage"
         className="capitalize underline-offset-4 outline-none hover:text-white hover:underline focus-visible:text-white focus-visible:underline"
       >
-        Blue Harvest (SE)
+        Blue Harvest{' '}
+        <span>
+          (
+          <abbr className="no-underline" title="Special Edition">
+            SE
+          </abbr>
+          )
+        </span>
       </Link>
 
       {entries.length ? (
