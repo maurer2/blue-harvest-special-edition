@@ -1,7 +1,10 @@
 import { ZodError, type z } from 'zod';
 
 // https://github.com/colinhacks/zod#writing-generic-functions
-export default async function fetcher<T extends z.ZodTypeAny>(url: string, schema?: T) {
+export default async function fetcher<T extends z.ZodTypeAny>(
+  url: string,
+  schema: T,
+): Promise<z.infer<T>> {
   try {
     const response = await fetch(url, { cache: 'force-cache' });
 
@@ -20,8 +23,10 @@ export default async function fetcher<T extends z.ZodTypeAny>(url: string, schem
   } catch (error) {
     if (error instanceof Error || error instanceof ZodError) {
       console.warn(error.message);
+
+      throw new Error(error.message, { cause: error });
     }
 
-    console.warn('Unknown error');
+    throw new Error('Unknown error');
   }
 }

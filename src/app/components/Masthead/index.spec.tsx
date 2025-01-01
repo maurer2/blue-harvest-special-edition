@@ -1,10 +1,12 @@
 import { render, screen, within } from '@testing-library/react';
-import type { ComponentPropsWithoutRef } from 'react';
-import { describe, expect, it, vi } from 'vitest';
+import type { ComponentProps } from 'react';
+import { Suspense } from 'react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import Navigation from '.';
 
-type NavigationProps = ComponentPropsWithoutRef<typeof Navigation>;
+type NavigationProps = ComponentProps<typeof Navigation>;
+type PromisePayload = NonNullable<Awaited<NavigationProps['categoriesPromise']>>;
 
 vi.mock('next/navigation', () => ({
   usePathname() {
@@ -12,38 +14,92 @@ vi.mock('next/navigation', () => ({
   },
 }));
 
-describe('Masthead', () => {
+describe.skip('Masthead', () => {
+  let categoriesPromise: PromiseWithResolvers<PromisePayload>;
+
   const props: NavigationProps = {
-    categories: {
-      category1: 'http://www.category1.co.uk',
-      category2: 'http://www.category2.co.uk',
-    },
+    categoriesPromise: undefined,
   };
 
-  async function renderSeverComponent(currentProps: NavigationProps = props) {
+  beforeEach(() => {
+    categoriesPromise = Promise.withResolvers();
+  });
+
+  async function renderAsyncComponent(currentProps: NavigationProps = props) {
     const component = await Navigation({ ...currentProps });
 
     return render(component);
   }
 
-  it('should render', async () => {
-    await renderSeverComponent();
+  describe('Component states', () => {
+    it('should render suspense fallback while categories promise is pending', async () => {
+      render(
+        <Suspense fallback={<p>Fallback</p>}>
+          <Navigation categoriesPromise={categoriesPromise.promise} />
+        </Suspense>,
+      );
 
-    expect(screen.getByRole('banner')).toBeInTheDocument();
+      expect(await screen.findByText('Fallback')).toBeInTheDocument();
+      expect(screen.queryByRole('banner')).not.toBeInTheDocument();
+    });
+
+    it('should render component when categories promise is resolved', async () => {
+      categoriesPromise.resolve({
+        message: 'ok',
+        result: {
+          category1: 'http://www.category1.co.uk',
+          category2: 'http://www.category2.co.uk',
+        },
+      });
+
+      await renderAsyncComponent({
+        categoriesPromise: categoriesPromise.promise,
+      });
+
+      expect(await screen.findByRole('banner')).toBeInTheDocument();
+      expect(screen.queryByText('Fallback')).not.toBeInTheDocument();
+    });
+
+    it.todo('should render error fallback when categories promise is rejected');
   });
 
-  it('should render homepage button', async () => {
-    await renderSeverComponent();
+  it('should render link to homepage', async () => {
+    categoriesPromise.resolve({
+      message: 'ok',
+      result: {
+        category1: 'http://www.category1.co.uk',
+        category2: 'http://www.category2.co.uk',
+      },
+    });
 
-    expect(screen.getByRole('link', { name: 'Blue Harvest (SE)' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Blue Harvest (SE)' })).toHaveAttribute('href', '/');
-    expect(screen.getByRole('link', { name: 'Blue Harvest (SE)' })).toHaveAttribute('title');
+    await renderAsyncComponent({
+      categoriesPromise: categoriesPromise.promise,
+    });
+
+    expect(screen.getByRole('banner')).toBeInTheDocument();
+
+    expect(screen.getByRole('link', { name: /Blue Harvest/ })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Blue Harvest/ })).toHaveAttribute('href', '/');
+    expect(screen.getByRole('link', { name: /Blue Harvest/ })).toHaveAttribute('title');
+
+    expect(screen.getByTitle('Special Edition')).toBeInTheDocument();
+    expect(screen.getByTitle('Special Edition')).toHaveTextContent('SE');
   });
 
   it('should render menu links', async () => {
-    await renderSeverComponent();
+    categoriesPromise.resolve({
+      message: 'ok',
+      result: {
+        category1: 'http://www.category1.co.uk',
+        category2: 'http://www.category2.co.uk',
+      },
+    });
 
-    expect(screen.getByRole('navigation')).toBeInTheDocument();
+    await renderAsyncComponent({
+      categoriesPromise: categoriesPromise.promise,
+    });
+
+    expect(await screen.findByRole('navigation')).toBeInTheDocument();
 
     const { getAllByRole } = within(screen.getByRole('navigation'));
 

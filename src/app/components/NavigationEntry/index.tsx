@@ -11,7 +11,8 @@ type NavigationEntryProps = {
 
 function NavigationEntry({ name }: NavigationEntryProps): ReactElement {
   const pathname = usePathname();
-  const isActive = pathname.startsWith(`/categories/${name}`);
+  const isActive =
+    pathname.startsWith(`/categories/${name}`) || pathname.startsWith(`/details/${name}`);
 
   return (
     <Link
