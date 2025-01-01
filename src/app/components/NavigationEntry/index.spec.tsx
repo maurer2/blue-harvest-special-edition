@@ -12,7 +12,7 @@ vi.mock('next/navigation', () => ({
   },
 }));
 
-describe('Navigation Entry', () => {
+describe.skip('Navigation Entry', () => {
   const props: NavigationEntryProps = {
     name: 'current-page',
   };

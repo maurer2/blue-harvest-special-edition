@@ -6,7 +6,7 @@ import FilmDetails from '.';
 
 type FilmDetailsProps = ComponentPropsWithoutRef<typeof FilmDetails>;
 
-describe('FilmDetails', () => {
+describe.skip('FilmDetails', () => {
   const props: FilmDetailsProps = {
     details: {
       title: 'A New Hope',

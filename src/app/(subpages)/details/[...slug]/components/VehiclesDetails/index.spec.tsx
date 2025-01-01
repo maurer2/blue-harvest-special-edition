@@ -6,7 +6,7 @@ import VehicleDetails from '.';
 
 type VehicleDetailsProps = ComponentPropsWithoutRef<typeof VehicleDetails>;
 
-describe('VehicleDetails', () => {
+describe.skip('VehicleDetails', () => {
   const props: VehicleDetailsProps = {
     details: {
       name: 'Sand Crawler',

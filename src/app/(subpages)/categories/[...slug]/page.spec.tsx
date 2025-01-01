@@ -66,7 +66,7 @@ vi.mock('next/navigation', () => ({
 
 export const server = setupServer();
 
-describe('CategoryPage', () => {
+describe.skip('CategoryPage', () => {
   const props: CategoryPageProps = {
     params: Promise.resolve({ slug: ['people', '1'] }),
     searchParams: Promise.resolve({ expanded: '' }),

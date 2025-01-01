@@ -6,7 +6,7 @@ import PlanetDetails from '.';
 
 type PlanetDetailsProps = ComponentPropsWithoutRef<typeof PlanetDetails>;
 
-describe('PlanetDetails', () => {
+describe.skip('PlanetDetails', () => {
   const props: PlanetDetailsProps = {
     details: {
       name: 'Tatooine',

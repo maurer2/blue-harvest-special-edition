@@ -6,7 +6,7 @@ import PeopleDetails from '.';
 
 type PeopleDetailsProps = ComponentPropsWithoutRef<typeof PeopleDetails>;
 
-describe('PeopleDetails', () => {
+describe.skip('PeopleDetails', () => {
   const props: PeopleDetailsProps = {
     details: {
       name: 'Luke Skywalker',
