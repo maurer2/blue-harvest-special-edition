@@ -1,6 +1,5 @@
 'use client';
 
-import { QUERY_PARAM_KEYS } from '@/app/(subpages)/categories/[...slug]/constants';
 import { FoldVertical, UnfoldVertical } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import type { ReactElement } from 'react';
@@ -8,6 +7,10 @@ import { useTransition } from 'react';
 
 type ToggleBarProps = {
   onRevalidateCurrentCategoryPage: () => Promise<void>;
+};
+
+const QUERY_PARAM_KEYS = {
+  EXPANDED: 'expanded',
 };
 
 function ToggleBar({ onRevalidateCurrentCategoryPage }: ToggleBarProps): ReactElement {
