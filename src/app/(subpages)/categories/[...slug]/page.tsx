@@ -13,6 +13,14 @@ type CategoryProps = {
   params: Promise<{ slug: string[] }>;
 };
 
+export async function generateStaticParams() {
+  const categories = await getRootCategoryEntries();
+
+  return Object.keys(categories.result).map((category) => ({
+    slug: [category],
+  }));
+}
+
 export default async function Category({ params }: CategoryProps) {
   const [category, pageNumber] = (await params).slug;
 
